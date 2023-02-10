@@ -23,8 +23,8 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(join("client", "build")));
 
-  app.get("*", function (request, response) {
-    response.sendFile(resolve(__dirname, "../client/build", "index.html"));
+  app.get("*", function (req, res) {
+    res.sendFile(resolve(__dirname, "../client/build", "index.html"));
   });
 } else {
   app.get("/", (req, res) => {
@@ -32,11 +32,13 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.use(require('./controllers'))
+
 const startApolloServer = async (typeDefs, resolvers) => {
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });
   db.once("open", () => {
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
       console.log(
         `Use GraphQL at http://localhost:${PORT}${apolloServer.graphqlPath}`

@@ -1,29 +1,16 @@
-const yelp = require('yelp-fusion');
-
 function Home() {
+  const fetchYelp = async (location, term) => {
+    const response = await fetch(`http://localhost:3000/api/yelp?location=${location}&term=${term}`);
 
-  // Place holder for Yelp Fusion's API Key. Grab them
-  // from https://www.yelp.com/developers/v3/manage_app
-  const apiKey = 'CMiHXkPSeoA-06TyOgnomn9oYzTCgPxcfxmXRDSYrh-rg_4dXn0WRKvQEQOvztJywtFIgC77WBZh4qDpXIZETqcKWIbe-aq4LjnJf6iwrjjOhXQYJaU_moDdr7vlY3Yx';
+    const data = await response.json();
 
-  const searchRequest = {
-    term: 'Four Barrel Coffee',
-    location: 'san francisco, ca'
-  };
-
-  const client = yelp.client(apiKey);
-
-  client.search(searchRequest).then(response => {
-    const firstResult = response.jsonBody.businesses[0];
-    const prettyJson = JSON.stringify(firstResult, null, 4);
-    console.log(prettyJson);
-  }).catch(e => {
-    console.log(e);
-  });
+    console.log(data);
+  }
 
   return (
     <div>
       <h1>Home Page</h1>
+      <button onClick={() => fetchYelp('fountain valley ca', 'viet')}>Fetch Yelp</button>
     </div>
   );
 }
