@@ -2,23 +2,25 @@ import { useState } from 'react'
 
 function Home() {
   // Console logging your location using the browser
-  if (!navigator.geolocation) {
-    console.error(`Your browser doesn't support Geolocation`);
-  } else {
-    const onSuccess = position => {
-      const {
-        latitude,
-        longitude
-      } = position.coords;
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      console.error(`Your browser doesn't support Geolocation`);
+    } else {
+      const onSuccess = position => {
+        const {
+          latitude,
+          longitude
+        } = position.coords;
 
-      console.log(`Your location: (${latitude},${longitude})`);
+        console.log(`Your location: (${latitude},${longitude})`);
+      }
+
+      const onError = () => {
+        console.log(`Failed to get your location!`);
+      }
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
-
-    const onError = () => {
-      console.log(`Failed to get your location!`);
-    }
-
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }
 
   // Handle form logic
@@ -31,7 +33,8 @@ function Home() {
     setFormState({ ...formState, [name]: value })
   }
 
-  const handleFormSubmit = async (event) => {
+  // Fetch Yelp data
+  const yelpFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -45,10 +48,23 @@ function Home() {
     }
   }
 
+  // Fetch weather data
+  const weatherFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
-      <h1>Home Page</h1>
-      <form onSubmit={handleFormSubmit}>
+      <button onClick={getCurrentLocation}>Get My Location</button>
+      <hr />
+      <h1>Yelp Fetch</h1>
+      <form onSubmit={yelpFormSubmit}>
         <div>Location:</div>
         <input
           name='location'
@@ -64,6 +80,12 @@ function Home() {
           onChange={handleInputChange}
         />
         <button type='submit'>Fetch Yelp</button>
+      </form>
+      <hr />
+      <h1>Weather Data Fetch</h1>
+      <form onSubmit={weatherFormSubmit}>
+
+        <button type='submit'>Fetch Weather</button>
       </form>
     </div>
   );
