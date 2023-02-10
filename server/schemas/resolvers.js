@@ -12,13 +12,13 @@ const resolvers = {
     },
   },
   Mutation: {
-    register: async (parent, { name, email, password }) => {
-      const user = await User.create({ name, email, password });
+    register: async (parent, { name, username, email, password }) => {
+      const user = await User.create({ name, username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError("No user with this email found!");
