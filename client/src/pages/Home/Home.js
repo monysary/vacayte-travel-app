@@ -1,6 +1,27 @@
 import { useState } from 'react'
 
 function Home() {
+  // Console logging your location using the browser
+  if (!navigator.geolocation) {
+    console.error(`Your browser doesn't support Geolocation`);
+  } else {
+    const onSuccess = position => {
+      const {
+        latitude,
+        longitude
+      } = position.coords;
+
+      console.log(`Your location: (${latitude},${longitude})`);
+    }
+
+    const onError = () => {
+      console.log(`Failed to get your location!`);
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+
+  // Handle form logic
   const [formState, setFormState] = useState({
     location: '',
     term: ''
@@ -15,9 +36,9 @@ function Home() {
 
     try {
       const response = await fetch(`http://localhost:3000/api/yelp?location=${formState.location}&term=${formState.term}`);
-      
+
       const data = await response.json();
-      
+
       console.log(data);
     } catch (err) {
       console.log(err);
