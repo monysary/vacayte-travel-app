@@ -23,7 +23,6 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  trips: [Trip.schema],
 });
 
 userSchema.pre("save", async function (next) {
