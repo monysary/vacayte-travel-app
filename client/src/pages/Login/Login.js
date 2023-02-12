@@ -64,7 +64,7 @@ function Login() {
           alignItems: 'center',
         }}
       >
-        <Typography component="h2" variant="h4">
+        <Typography component="h2" variant="h4" fontFamily='Josefin Sans'>
           Sign In
         </Typography>
         <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
