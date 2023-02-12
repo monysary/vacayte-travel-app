@@ -1,124 +1,30 @@
-import { useState } from 'react'
+import {
+  Grid,
+  Paper,
+} from '@mui/material';
+import Login from '../Login';
 
 function Home() {
-  // Console logging your location using the browser
-  const getCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      console.error(`Your browser doesn't support Geolocation`);
-    } else {
-      const onSuccess = position => {
-        const {
-          latitude,
-          longitude
-        } = position.coords;
-
-        console.log(`Your location: (${latitude},${longitude})`);
-      }
-
-      const onError = () => {
-        console.log(`Failed to get your location!`);
-      }
-
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-  }
-
-  // Handle form logic
-  const [formState, setFormState] = useState({
-    location: '',
-    term: '',
-    alias: '',
-  })
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    setFormState({ ...formState, [name]: value })
-  }
-
-  // Fetch Yelp data by location and term
-  const yelpLocationTerm = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await fetch(`http://localhost:3000/api/yelp?location=${formState.location}&term=${formState.term}`);
-
-      const data = await response.json();
-
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Fetch Yelp data by business alias
-  const yelpBusinessAlias = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await fetch(`http://localhost:3000/api/yelp/${formState.alias}`);
-
-      const data = await response.json();
-
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Fetch weather data
-  const weatherFormSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   return (
-    <div>
-      <button onClick={getCurrentLocation}>Get My Location</button>
-      <hr />
-      {/* ---------- */}
-      <h1>Yelp Fetch by Location and Term</h1>
-      <form onSubmit={yelpLocationTerm}>
-        <div>Location:</div>
-        <input
-          name='location'
-          placeholder='Location'
-          value={formState.location}
-          onChange={handleInputChange}
-        />
-        <div>Term:</div>
-        <input
-          name='term'
-          placeholder='Keyword'
-          value={formState.term}
-          onChange={handleInputChange}
-        />
-        <button type='submit'>Fetch Yelp</button>
-      </form>
-      <hr />
-      {/* ---------- */}
-      <h1>Yelp Fetch by Business Alias</h1>
-      <form onSubmit={yelpBusinessAlias}>
-        <div>Business Alias:</div>
-        <input
-          name='alias'
-          placeholder='Business Alias'
-          value={formState.alias}
-          onChange={handleInputChange}
-        />
-        <button type='submit'>Fetch Yelp</button>
-      </form>
-      <hr />
-      {/* ---------- */}
-      <h1>Weather Data Fetch</h1>
-      <form onSubmit={weatherFormSubmit}>
-
-        <button type='submit'>Fetch Weather</button>
-      </form>
-    </div>
+    <Grid container component="main" wrap='nowrap' sx={{ height: '100vh', 
+    backgroundImage: 'url(https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: (t) =>
+      t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+    backgroundSize: 'cover',
+    }}>
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+      />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ borderRadius: '50px 0px 0px 50px' }}>
+        <Grid container height={1} justifyContent='center' alignItems='center'>
+          <Login />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
