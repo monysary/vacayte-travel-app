@@ -4,25 +4,14 @@ import {
   TextField,
   Button,
   Grid,
-  Link
 } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../Home/Home.js'
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth.js";
-
-// export const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#569597',
-//     },
-//     // secondary: {
-//     //   main: '',
-//     // },
-//   },
-// });
 
 function Login() {
 
@@ -59,7 +48,7 @@ function Login() {
         sx={{
           my: 8,
           mx: 4,
-          display: 'flex',
+          display: 'none',
           flexDirection: 'column',
           alignItems: 'center',
         }}
@@ -72,10 +61,9 @@ function Login() {
             margin="normal"
             required
             fullWidth
-            label="Email Address"
             name="email"
-            autoComplete="email"
-            autoFocus
+            label="Email Address"
+            type='text'
             value={formState.email}
             onChange={handleInputChange}
           />
@@ -86,7 +74,6 @@ function Login() {
             name="password"
             label="Password"
             type="password"
-            autoComplete="current-password"
             value={formState.password}
             onChange={handleInputChange}
           />
@@ -94,16 +81,17 @@ function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            color='primary'
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <RouterLink to='/register' style={{ textDecoration: 'none' }}>
+                <Typography variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Typography>
+              </RouterLink>
             </Grid>
           </Grid>
         </Box>

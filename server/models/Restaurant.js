@@ -8,6 +8,6 @@ const restaurantSchema = new Schema({
     }
 })
 
-const Restaurant = model('Restaurant', restaurantSchema);
+const Restaurant = model('VacayteRestaurant', restaurantSchema);
 
 module.exports = Restaurant;

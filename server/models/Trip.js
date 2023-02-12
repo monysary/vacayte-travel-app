@@ -21,6 +21,6 @@ const tripSchema = new Schema({
     },
 });
 
-const Trip = model('Trip', tripSchema);
+const Trip = model('VacayteTrip', tripSchema);
 
 module.exports = Trip;

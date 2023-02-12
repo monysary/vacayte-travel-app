@@ -4,6 +4,6 @@ const activitySchema = new Schema({
 
 });
 
-const Activity = model('Activity', activitySchema);
+const Activity = model('VacayteActivity', activitySchema);
 
 module.exports = Activity;

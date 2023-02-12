@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Grid,
   Paper,
@@ -6,16 +7,25 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Login from '../Login';
+import Register from '../Register';
 
 export const theme = createTheme({
   palette: {
     primary: {
       main: '#569597',
     },
+    secondary: {
+      main: '#D9BEAA'
+    },
+    info: {
+      main: '#B2B2B2'
+    }
   },
 });
 
 function Home() {
+  const [loginDisplay, setLoginDisplay] = useState(true);
+  const [registerDisplay, setRegisterDisplay] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,7 +70,8 @@ function Home() {
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ borderRadius: '50px 0px 0px 50px' }}>
           <Grid container height={1} justifyContent='center' alignItems='center'>
-            <Login />
+            <Login displayState={loginDisplay}/>
+            <Register displayState={registerDisplay}/>
           </Grid>
         </Grid>
       </Grid>
