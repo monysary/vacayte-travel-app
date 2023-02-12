@@ -6,24 +6,25 @@ import {
   Grid,
   Link
 } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from '../Home/Home.js'
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
-
 import Auth from "../../utils/auth.js";
 
+// export const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#569597',
+//     },
+//     // secondary: {
+//     //   main: '',
+//     // },
+//   },
+// });
+
 function Login() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#569597',
-      },
-      // secondary: {
-      //   main: '',
-      // },
-    },
-  });
 
   const [formState, setFormState] = useState({
     email: "",
@@ -63,7 +64,7 @@ function Login() {
           alignItems: 'center',
         }}
       >
-        <Typography component="h1" variant="h4">
+        <Typography component="h2" variant="h4">
           Sign In
         </Typography>
         <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
