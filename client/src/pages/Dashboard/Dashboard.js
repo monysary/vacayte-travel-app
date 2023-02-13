@@ -74,7 +74,7 @@ function Dashboard() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Box pt='40px'>
+                        <Box pt='40px' >
                             <AddTripForm font={font.primary} fontColor={font.color}/>
                         </Box>
                     </Box>

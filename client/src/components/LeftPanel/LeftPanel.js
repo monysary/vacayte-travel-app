@@ -39,7 +39,7 @@ function LeftPanel({ font, fontColor }) {
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
-                            <Button variant='text' fullWidth>
+                            <Button variant='text' fullWidth sx={{ color: `${fontColor.black}` }}>
                                 Philippines Trip
                             </Button>
                         </Grid>
