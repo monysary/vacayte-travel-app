@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-function SearchBar() {
+function SearchBar({ font, fontColor }) {
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
@@ -18,7 +18,7 @@ function SearchBar() {
                 placeholder='Search activities...'
                 sx={{
                     borderRadius: '24px',
-                    backgroundColor: '#F5F5F5',
+                    backgroundColor: `${fontColor.white}`,
                     opacity: '0.4'
                 }}
                 InputProps={{

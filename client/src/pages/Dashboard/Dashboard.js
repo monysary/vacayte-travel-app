@@ -21,13 +21,25 @@ function Dashboard() {
         auth.logout();
     }
 
+    const font = {
+        primary: 'Josefin Sans',
+        color: {
+            primary: '#569597',
+            secondary: '#D9BEAA',
+            white: '#F5F5F5',
+            black: '#252525',
+            grey: '#B2B2B2',
+            darkGrey: '#606060'
+        }
+    }
+
     const { data: { firstName } } = auth.getProfile();
 
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
                 <Grid item md={2}>
-                    <LeftPanel />
+                    <LeftPanel font={font.primary} fontColor={font.color}/>
                 </Grid>
                 <Grid item md={8}
                     sx={{
@@ -39,36 +51,36 @@ function Dashboard() {
                 >
                     <Box height='100vh' overflow='auto'>
                         <Box p='30px 20% 20px'>
-                            <SearchBar />
+                            <SearchBar font={font.primary} fontColor={font.color}/>
                         </Box>
                         <Grid container wrap='nowrap' justifyContent='space-between' px='40px'>
                             <Grid item>
-                                <Typography variant='h4' fontFamily='Josefin Sans' color='#F5F5F5'>
+                                <Typography variant='h4' fontFamily={font.primary} color='#F5F5F5'>
                                     Hello, {firstName}
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily='Josefin Sans' color='#B2B2B2'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2'>
                                     Let's make some memories!
                                 </Typography>
                             </Grid>
                             <Grid item> 
-                                <Typography variant='h4' fontFamily='Josefin Sans' color='#F5F5F5' textAlign='right'>
+                                <Typography variant='h4' fontFamily={font.primary} color='#F5F5F5' textAlign='right'>
                                     Philippines Trip    
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily='Josefin Sans' color='#B2B2B2' textAlign='right'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2' textAlign='right'>
                                     Manila, Philippines
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily='Josefin Sans' color='#B2B2B2' textAlign='right'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2' textAlign='right'>
                                     March 12, 2023 - March 31, 2023
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Box pt='40px'>
-                            <AddTripForm />
+                            <AddTripForm font={font.primary} fontColor={font.color}/>
                         </Box>
                     </Box>
                 </Grid>
                 <Grid item md={2}>
-                    <RightPanel />
+                    <RightPanel font={font.primary} fontColor={font.color}/>
                 </Grid>
             </Grid>
         </ThemeProvider>

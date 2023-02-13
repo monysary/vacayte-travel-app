@@ -11,13 +11,13 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
-function AddTripForm() {
+function AddTripForm({ font }) {
     const [formState, setFormState] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
+        tripName: "",
+        location: "",
+        startDate: "",
+        endDate: "",
+        activities: [],
     });
 
     const handleInputChange = ({ target: { name, value } }) => {
@@ -32,17 +32,18 @@ function AddTripForm() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs" sx={{backgroundColor: '#F5F5F5'}}>
+            <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#F5F5F5', borderRadius: '20px' }}>
                 <CssBaseline />
                 <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        padding: '40px 20px'
                     }}
                 >
-                    <Typography component="h2" variant="h4" fontFamily='Josefin Sans'>
-                        Sign up
+                    <Typography component="h2" variant="h4" fontFamily={font}>
+                        Trip Information
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -69,13 +70,14 @@ function AddTripForm() {
                                 />
                             </Grid>
                             <Grid item xs={12}>
+                                <Typography fontFamily={font}>Trip Name</Typography>
                                 <TextField
                                     required
                                     fullWidth
-                                    label="Email Address"
-                                    name="email"
-                                    type='email'
-                                    value={formState.email}
+                                    placeholder="Trip Name"
+                                    name="tripName"
+                                    type='text'
+                                    value={formState.tripName}
                                     onChange={handleInputChange}
                                 />
                             </Grid>

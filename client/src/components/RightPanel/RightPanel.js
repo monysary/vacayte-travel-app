@@ -8,7 +8,7 @@ import { theme } from '../../App.js';
 
 import auth from '../../utils/auth.js';
 
-function RightPanel() {
+function RightPanel({ font, fontColor }) {
     return (
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
@@ -20,13 +20,13 @@ function RightPanel() {
                 <Grid item height='100%'>
                     <Grid container alignItems='center' p='20px 30px' gap='20px'>
                         <Grid item>
-                            <Typography variant='h6' fontFamily='Josefin Sans' fontSize='18px'>
+                            <Typography variant='h6' fontFamily={font} fontSize='18px'>
                                 SAVED ACTIVITIES
                             </Typography>
                         </Grid>
                         <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            <Typography textAlign='center' sx={{ color: '#252525' }}>
+                            <Typography textAlign='center'>
                                 No Trip Selected
                             </Typography>
                         </Grid>

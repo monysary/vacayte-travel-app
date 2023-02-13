@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
-function LeftPanel() {
+function LeftPanel({ font, fontColor }) {
     return (
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
@@ -16,30 +16,30 @@ function LeftPanel() {
                         <span style={{
                             fontFamily: 'satisfy',
                             fontSize: '40px',
-                            color: '#569597',
+                            color: `${fontColor.primary}`,
                         }}>Vacay</span>
                         <span style={{
                             fontFamily: 'zilla slab',
                             fontSize: '30px',
-                            color: '#606060'
+                            color: `${fontColor.darkGrey}`
                         }}>te</span>
                     </Typography>
                 </Grid>
                 <Grid item height='100%'>
                     <Grid container alignItems='center' p='20px 30px' gap='20px'>
                         <Grid item>
-                            <Typography variant='h6' fontFamily='Josefin Sans' fontSize='18px'>
+                            <Typography variant='h6' fontFamily={font} fontSize='18px'>
                                 MY TRIPS
                             </Typography>
                         </Grid>
                         <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            <Button startIcon={<AddIcon />} variant='contained' fullWidth sx={{borderRadius: '20px'}}>
+                            <Button startIcon={<AddIcon />} variant='contained' fullWidth sx={{ borderRadius: '20px' }}>
                                 ADD TRIP
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
-                            <Button variant='text' fullWidth sx={{color: '#252525'}}>
+                            <Button variant='text' fullWidth>
                                 Philippines Trip
                             </Button>
                         </Grid>
