@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Grid,
     Typography,
@@ -12,6 +13,7 @@ import auth from '../../utils/auth.js';
 import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
 import SearchBar from '../../components/SearchBar';
+import Welcome from '../../components/Welcome';
 import AddTripForm from '../../components/AddTripForm';
 
 function Dashboard() {
@@ -34,6 +36,9 @@ function Dashboard() {
     }
 
     const { data: { firstName } } = auth.getProfile();
+
+    const [welcomeDisplay, setWelcomeDisplay] = useState(true);
+    const [addTripDisplay, setAddTripDisplay] = useState(false);
 
     return (
         <ThemeProvider theme={theme}>
@@ -75,7 +80,8 @@ function Dashboard() {
                             </Grid>
                         </Grid>
                         <Box pt='40px' >
-                            <AddTripForm font={font.primary} fontColor={font.color}/>
+                            <Welcome font={font.primary} fontColor={font.color} welcomeDisplay={welcomeDisplay} setWelcomeDisplay={setWelcomeDisplay} setAddTripDisplay={setAddTripDisplay}/>
+                            <AddTripForm font={font.primary} fontColor={font.color} addTripDisplay={addTripDisplay} setAddTripDisplay={setAddTripDisplay}/>
                         </Box>
                     </Box>
                 </Grid>

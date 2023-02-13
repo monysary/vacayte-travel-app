@@ -8,6 +8,8 @@ import {
     TextField,
     Button,
 } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from '../../App.js';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import SpaIcon from '@mui/icons-material/Spa';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -17,10 +19,8 @@ import HikingIcon from '@mui/icons-material/Hiking';
 import LandscapeIcon from '@mui/icons-material/Landscape';
 import LiquorIcon from '@mui/icons-material/Liquor';
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../App.js';
 
-function AddTripForm({ font, fontColor }) {
+function AddTripForm({ font, fontColor, addTripDisplay, setAddTripDisplay }) {
     const [formState, setFormState] = useState({
         tripName: '',
         location: '',
@@ -111,8 +111,12 @@ function AddTripForm({ font, fontColor }) {
                 component='form'
                 noValidate
                 onSubmit={handleFormSubmit}
-                maxWidth="xs"
-                sx={{ backgroundColor: '#F5F5F5', borderRadius: '20px' }}>
+                maxWidth="sm"
+                sx={{
+                    display: addTripDisplay ? 'block' : 'none',
+                    backgroundColor: '#F5F5F5',
+                    borderRadius: '20px'
+                }}>
                 <CssBaseline />
                 {/* -----Trip Information----- */}
                 <Box
