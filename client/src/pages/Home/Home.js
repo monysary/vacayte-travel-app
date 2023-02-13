@@ -24,6 +24,10 @@ export const theme = createTheme({
 });
 
 function Home() {
+  if (localStorage.getItem("auth_token")) {
+    window.location.assign("/dashboard");
+  }
+
   const [loginDisplay, setLoginDisplay] = useState(true);
   const [registerDisplay, setRegisterDisplay] = useState(false);
 
