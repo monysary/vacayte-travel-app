@@ -70,8 +70,10 @@ function Home() {
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ borderRadius: '50px 0px 0px 50px' }}>
           <Grid container height={1} justifyContent='center' alignItems='center'>
-            <Login displayState={loginDisplay}/>
-            <Register displayState={registerDisplay}/>
+            <Grid item>
+              <Login displayState={loginDisplay} setLoginDisplay={setLoginDisplay} setRegisterDisplay={setRegisterDisplay} />
+              <Register displayState={registerDisplay} setLoginDisplay={setLoginDisplay} setRegisterDisplay={setRegisterDisplay} />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

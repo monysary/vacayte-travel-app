@@ -16,7 +16,7 @@ import { REGISTER_USER } from "../../utils/mutations";
 
 import Auth from "../../utils/auth.js";
 
-function Register() {
+function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -71,8 +71,7 @@ function Register() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
-            display: 'flex',
+            display: displayState ? 'flex' : 'none',
             flexDirection: 'column',
             alignItems: 'center',
           }}
@@ -154,7 +153,13 @@ function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link
+                  variant="body2"
+                  sx={{ '&:hover': { cursor: 'pointer' } }}
+                  onClick={() => {
+                    setLoginDisplay(true)
+                    setRegisterDisplay(false)
+                  }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
