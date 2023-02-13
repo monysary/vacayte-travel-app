@@ -55,21 +55,21 @@ function Dashboard() {
                         </Box>
                         <Grid container wrap='nowrap' justifyContent='space-between' px='40px'>
                             <Grid item>
-                                <Typography variant='h4' fontFamily={font.primary} color='#F5F5F5'>
+                                <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`}>
                                     Hello, {firstName}
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`}>
                                     Let's make some memories!
                                 </Typography>
                             </Grid>
                             <Grid item> 
-                                <Typography variant='h4' fontFamily={font.primary} color='#F5F5F5' textAlign='right'>
+                                <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
                                     Philippines Trip    
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2' textAlign='right'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
                                     Manila, Philippines
                                 </Typography>
-                                <Typography variant='subtitle1' fontFamily={font.primary} color='#B2B2B2' textAlign='right'>
+                                <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
                                     March 12, 2023 - March 31, 2023
                                 </Typography>
                             </Grid>

@@ -38,7 +38,7 @@ export const theme = createTheme({
       main: '#D9BEAA'
     },
     info: {
-      main: '#B2B2B2'
+      main: '#606060'
     }
   },
 });
