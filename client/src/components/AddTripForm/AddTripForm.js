@@ -22,10 +22,10 @@ import { theme } from '../../App.js';
 
 function AddTripForm({ font, fontColor }) {
     const [formState, setFormState] = useState({
-        tripName: "",
-        location: "",
-        startDate: "",
-        endDate: "",
+        tripName: '',
+        location: '',
+        startDate: '',
+        endDate: '',
         activities: [],
     });
 
@@ -78,7 +78,7 @@ function AddTripForm({ font, fontColor }) {
         },
     ]
 
-    function ActivityButton({ name, icon }) {
+    function ActivityChoices({ name, icon }) {
         return (
             <Grid item xs={7}>
                 <Button
@@ -93,14 +93,31 @@ function AddTripForm({ font, fontColor }) {
         )
     }
 
+    const clearButton = () => {
+        setFormState({
+            ...formState,
+            tripName: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+        })
+    }
+
+    const [isDisplayed, setIsDisplayed] = useState(true)
+
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#F5F5F5', borderRadius: '20px' }}>
+            <Container
+                component='form'
+                noValidate
+                onSubmit={handleFormSubmit}
+                maxWidth="xs"
+                sx={{ backgroundColor: '#F5F5F5', borderRadius: '20px' }}>
                 <CssBaseline />
                 {/* -----Trip Information----- */}
                 <Box
                     sx={{
-                        display: 'none',
+                        display: isDisplayed ? 'flex' : 'none',
                         flexDirection: 'column',
                         alignItems: 'center',
                         padding: '40px 20px'
@@ -109,7 +126,7 @@ function AddTripForm({ font, fontColor }) {
                     <Typography component="h2" variant="h4" fontFamily={font}>
                         Trip Information
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 3 }}>
+                    <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography fontFamily={font}>Trip Name</Typography>
@@ -182,14 +199,14 @@ function AddTripForm({ font, fontColor }) {
                         </Grid>
                         <Grid container justifyContent='center' gap='40px'>
                             <Button
-                                type="submit"
+                                onClick={() => clearButton()}
                                 variant="outlined"
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Clear
                             </Button>
                             <Button
-                                type="submit"
+                                onClick={() => setIsDisplayed(!isDisplayed)}
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
@@ -201,7 +218,7 @@ function AddTripForm({ font, fontColor }) {
                 {/* -----Trip Activities----- */}
                 <Box
                     sx={{
-                        display: 'flex',
+                        display: !isDisplayed ? 'flex' : 'none',
                         flexDirection: 'column',
                         alignItems: 'center',
                         padding: '40px 20px'
@@ -210,13 +227,13 @@ function AddTripForm({ font, fontColor }) {
                     <Typography component="h2" variant="h4" fontFamily={font}>
                         Activities
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 3 }}>
+                    <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2} justifyContent='center'>
-                            {activity.map((activity) => <ActivityButton name={activity.name} icon={activity.icon} />)}
+                            {activity.map((activity) => <ActivityChoices name={activity.name} icon={activity.icon} />)}
                         </Grid>
                         <Grid container justifyContent='center' gap='40px'>
                             <Button
-                                type="submit"
+                                onClick={() => setIsDisplayed(!isDisplayed)}
                                 variant="outlined"
                                 sx={{ mt: 3, mb: 2 }}
                             >
