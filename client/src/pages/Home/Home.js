@@ -8,6 +8,7 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Login from '../Login';
 import Register from '../Register';
+import homeBackground from '../../assets/images/home-background.jpg'
 
 export const theme = createTheme({
   palette: {
@@ -35,7 +36,7 @@ function Home() {
     <ThemeProvider theme={theme}>
       <Grid container component="main" wrap='nowrap' sx={{
         height: '100vh',
-        backgroundImage: 'url(https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
+        backgroundImage: `url(${homeBackground})`,
         backgroundSize: 'cover',
       }}>
         <Grid
