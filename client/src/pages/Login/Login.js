@@ -31,17 +31,15 @@ function Login({ displayState, setLoginDisplay, setRegisterDisplay }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // try {
-    //   const { data } = await Login({
-    //     variables: { ...formState },
-    //   });
+    try {
+      const { data } = await Login({
+        variables: { ...formState },
+      });
 
-    //   Auth.login(data.login.token);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-
-    console.log('Logged In!');
+      Auth.login(data.login.token);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -90,7 +88,7 @@ function Login({ displayState, setLoginDisplay, setRegisterDisplay }) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Log In
             </Button>
             <Grid container>
               <Grid item xs>

@@ -52,17 +52,14 @@ function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // try {
-    //   const { data } = await register({
-    //     variables: { ...formState },
-    //   });
-    //   console.log(data);
-    //   Auth.login(data.register.token);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-
-    console.log('New User Registered!');
+    try {
+      const { data } = await register({
+        variables: { ...formState },
+      });
+      Auth.login(data.register.token);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -149,7 +146,7 @@ function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Create Account
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
