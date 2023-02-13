@@ -6,12 +6,14 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
+import auth from '../../utils/auth.js';
+
 function RightPanel() {
     return (
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
                 <Grid item>
-                    <Button variant='outlined'>
+                    <Button variant='outlined' onClick={() => auth.logout()}>
                         Logout
                     </Button>
                 </Grid>

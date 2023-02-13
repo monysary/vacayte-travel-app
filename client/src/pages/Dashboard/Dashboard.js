@@ -9,6 +9,10 @@ import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
 
 function Dashboard() {
+    if(!localStorage.getItem('auth_token')) {
+        window.location.assign('/');
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
