@@ -12,6 +12,7 @@ import auth from '../../utils/auth.js';
 import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
 import SearchBar from '../../components/SearchBar';
+import AddTripForm from '../../components/AddTripForm';
 
 function Dashboard() {
     if (!localStorage.getItem('auth_token')) {
@@ -59,8 +60,8 @@ function Dashboard() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Box p='60px 100px 60px 0px'>
-
+                        <Box pt='40px'>
+                            <AddTripForm />
                         </Box>
                     </Box>
                 </Grid>
