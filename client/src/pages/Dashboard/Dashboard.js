@@ -17,6 +17,8 @@ import AddTripForm from '../../components/AddTripForm';
 function Dashboard() {
     if (!localStorage.getItem('auth_token')) {
         window.location.assign('/');
+    } else if (auth.tokenExpired()) {
+        auth.logout();
     }
 
     const { data: { firstName } } = auth.getProfile();

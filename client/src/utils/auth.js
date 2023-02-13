@@ -23,6 +23,19 @@ class AuthService {
     localStorage.removeItem("auth_token");
     window.location.assign('/');
   }
+
+  tokenExpired() {
+    const token = this.getToken();
+
+    if (!token) {
+      return true
+    }
+
+    const { exp } = decode(this.getToken());
+    const currentTime = new Date().getTime() / 1000
+    
+    return exp < currentTime;
+  }
 }
 
 export default new AuthService();
