@@ -13,9 +13,15 @@ const resolvers = {
   },
   Mutation: {
     register: async (parent, { firstName, lastName, email, password }) => {
-      const user = await User.create({ firstName, lastName, email, password });
-      const token = signToken(user);
-      return { token, user };
+      const user = await User.findOne({ email });
+
+      if (user) {
+        throw new AuthenticationError("User with this email already exists!");
+      }
+
+      const newUser = await User.create({ firstName, lastName, email, password });
+      const token = signToken(newUser);
+      return { token, newUser };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

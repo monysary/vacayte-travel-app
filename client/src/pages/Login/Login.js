@@ -11,7 +11,7 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../Home/Home.js'
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth.js";
 
@@ -39,6 +39,7 @@ function Login({ displayState, setLoginDisplay, setRegisterDisplay }) {
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
+      alert(err.message)
     }
   };
 
@@ -71,7 +72,6 @@ function Login({ displayState, setLoginDisplay, setRegisterDisplay }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  error={formState.password.length < 8 && formState.password.length > 0}
                   required
                   fullWidth
                   name="password"

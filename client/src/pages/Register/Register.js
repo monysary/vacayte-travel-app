@@ -59,6 +59,7 @@ function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
       Auth.login(data.register.token);
     } catch (err) {
       console.error(err);
+      alert(err.message)
     }
   };
 
