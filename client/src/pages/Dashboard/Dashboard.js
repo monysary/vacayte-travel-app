@@ -7,9 +7,10 @@ import dashboardBackground from '../../assets/images/dashboard-background.png';
 
 import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
+import SearchBar from '../../components/SearchBar';
 
 function Dashboard() {
-    if(!localStorage.getItem('auth_token')) {
+    if (!localStorage.getItem('auth_token')) {
         window.location.assign('/');
     }
 
@@ -19,7 +20,6 @@ function Dashboard() {
                 <Grid item md={2}>
                     <LeftPanel />
                 </Grid>
-                {/* -----Dashboard----- */}
                 <Grid item md={8}
                     sx={{
                         height: '100%',
@@ -28,7 +28,12 @@ function Dashboard() {
                         backgroundPosition: 'center'
                     }}
                 >
-
+                    {/* -----Dashboard----- */}
+                    <Grid container justifyContent='center' wrap='nowrap' sx={{ height: '100vh' }} py='30px' gap='10px'>
+                        <Grid item xs={8}>
+                            <SearchBar />
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid item md={2}>
                     <RightPanel />

@@ -26,7 +26,7 @@ function RightPanel() {
                         </Grid>
                         <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            <Typography textAlign='center' fullWidth sx={{ color: '#252525' }}>
+                            <Typography textAlign='center' sx={{ color: '#252525' }}>
                                 No Trip Selected
                             </Typography>
                         </Grid>
