@@ -6,6 +6,7 @@ import { theme } from '../../App.js';
 import dashboardBackground from '../../assets/images/dashboard-background.png';
 
 import LeftPanel from '../../components/LeftPanel';
+import RightPanel from '../../components/RightPanel';
 
 function Dashboard() {
     return (
@@ -25,9 +26,8 @@ function Dashboard() {
                 >
 
                 </Grid>
-                {/* -----Right Panel----- */}
                 <Grid item md={2}>
-
+                    <RightPanel />
                 </Grid>
             </Grid>
         </ThemeProvider>

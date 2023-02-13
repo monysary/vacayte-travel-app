@@ -10,8 +10,8 @@ import { theme } from '../../App.js'
 function LeftPanel() {
     return (
         <ThemeProvider theme={theme}>
-            <Grid container alignItems='center' py='30px' gap='30px'>
-                <Grid item xs={12}>
+            <Grid container justifyContent='center' py='30px' gap='30px'>
+                <Grid item>
                     <Typography textAlign='center'>
                         <span style={{
                             fontFamily: 'satisfy',
@@ -28,7 +28,7 @@ function LeftPanel() {
                 <Grid item height='100%'>
                     <Grid container alignItems='center' p='20px 30px' gap='20px'>
                         <Grid item>
-                            <Typography variant='h6' fontFamily='Josefin Sans' fontSize='20px'>
+                            <Typography variant='h6' fontFamily='Josefin Sans' fontSize='18px'>
                                 MY TRIPS
                             </Typography>
                         </Grid>
