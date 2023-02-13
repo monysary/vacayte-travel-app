@@ -6,7 +6,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import { createTheme } from "@mui/material/styles";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 
@@ -27,6 +27,20 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
+});
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#569597',
+    },
+    secondary: {
+      main: '#D9BEAA'
+    },
+    info: {
+      main: '#B2B2B2'
+    }
+  },
 });
 
 function App() {

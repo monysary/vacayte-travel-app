@@ -9,7 +9,7 @@ import {
   Link
 } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../Home/Home.js';
+import { theme } from '../../App.js';
 import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { REGISTER_USER } from "../../utils/mutations";

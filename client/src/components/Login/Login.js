@@ -9,9 +9,9 @@ import {
   CssBaseline
 } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../Home/Home.js'
+import { theme } from '../../App.js'
 import { useState } from "react";
-import { ApolloError, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth.js";
 

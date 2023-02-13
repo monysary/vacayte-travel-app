@@ -5,24 +5,12 @@ import {
   Typography,
   Box
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Login from '../Login';
-import Register from '../Register';
+import { ThemeProvider } from '@mui/material/styles';
+import {theme} from '../../App.js'
+import Login from '../../components/Login';
+import Register from '../../components/Register';
 import homeBackground from '../../assets/images/home-background.jpg'
 
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#569597',
-    },
-    secondary: {
-      main: '#D9BEAA'
-    },
-    info: {
-      main: '#B2B2B2'
-    }
-  },
-});
 
 function Home() {
   if (localStorage.getItem("auth_token")) {
