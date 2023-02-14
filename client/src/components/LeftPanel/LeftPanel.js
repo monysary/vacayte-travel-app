@@ -8,13 +8,25 @@ import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
-function LeftPanel({ font, fontColor }) {
+import { useQuery } from '@apollo/client';
+import { GET_MY_TRIPS } from '../../utils/queries.js';
+
+function LeftPanel({ font, fontColor, setIsDisplayed }) {
+    const { data } = useQuery(GET_MY_TRIPS);
+
+    // console.log(data);
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
                 <Grid item>
                     <Link sx={{ textDecoration: 'none', '&:hover': { cursor: 'pointer' } }}
-                        onClick={() => document.title = 'Vacayte - Welcome'}
+                        onClick={() => {
+                            setIsDisplayed({
+                                welcome: true,
+                                addTripForm: false
+                            })
+                        }}
                     >
                         <Typography textAlign='center'>
                             <span style={{
@@ -44,7 +56,10 @@ function LeftPanel({ font, fontColor }) {
                                 variant='contained'
                                 fullWidth sx={{ borderRadius: '20px' }}
                                 onClick={() => {
-                                    document.title = 'Vacayte - Add Trip'
+                                    setIsDisplayed({
+                                        welcome: false,
+                                        addTripForm: true
+                                    })
                                 }}
                             >ADD TRIP</Button>
                         </Grid>

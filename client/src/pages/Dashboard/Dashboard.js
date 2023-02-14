@@ -37,27 +37,16 @@ function Dashboard() {
 
     const { data: { firstName } } = auth.getProfile();
 
-    const [component, setComponent] = useState(null)
-
-    useEffect(() => {
-        switch (document.title) {
-            case 'Vacayte - Welcome':
-                setComponent(<Welcome font={font.primary} fontColor={font.color} />);
-                break;
-            case 'Vacayte - Add Trip':
-                setComponent(<AddTripForm font={font.primary} fontColor={font.color} />);
-                break;
-            default:
-                setComponent(<Welcome font={font.primary} fontColor={font.color} />);
-                break;
-        }
-    }, [document.title, font.primary, font.color])
+    const [isDisplayed, setIsDisplayed] = useState({
+        welcome: true,
+        addTripForm: false
+    })
 
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
                 <Grid item md={2}>
-                    <LeftPanel font={font.primary} fontColor={font.color} />
+                    <LeftPanel font={font.primary} fontColor={font.color} setIsDisplayed={setIsDisplayed} />
                 </Grid>
                 <Grid item md={8}
                     sx={{
@@ -93,7 +82,8 @@ function Dashboard() {
                             </Grid>
                         </Grid>
                         <Box pt='40px' >
-                            {component}
+                            <Welcome font={font.primary} fontColor={font.color} isDisplayed={isDisplayed} setIsDisplayed={setIsDisplayed} />
+                            <AddTripForm font={font.primary} fontColor={font.color} isDisplayed={isDisplayed} setIsDisplayed={setIsDisplayed} />
                         </Box>
                     </Box>
                 </Grid>

@@ -9,7 +9,7 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
-function Welcome({ font, fontColor }) {
+function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
     return (
         <ThemeProvider theme={theme}>
             <Container
@@ -21,7 +21,7 @@ function Welcome({ font, fontColor }) {
                 <CssBaseline />
                 <Box
                     sx={{
-                        display: 'flex',
+                        display: isDisplayed.welcome ? 'flex' : 'none',
                         flexDirection: 'column',
                         alignItems: 'center',
                         padding: '40px 20px'
@@ -50,7 +50,12 @@ function Welcome({ font, fontColor }) {
                         </Grid>
                         <Grid container justifyContent='center'>
                             <Button
-                                onClick={() => { document.title = 'Vacayte - Add Trip' }}
+                                onClick={() => {
+                                    setIsDisplayed({
+                                        welcome: false,
+                                        addTripForm: true
+                                    })
+                                }}
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
