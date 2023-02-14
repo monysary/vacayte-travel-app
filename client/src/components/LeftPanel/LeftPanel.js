@@ -12,9 +12,10 @@ import { useQuery } from '@apollo/client';
 import { GET_MY_TRIPS } from '../../utils/queries.js';
 
 function LeftPanel({ font, fontColor, setIsDisplayed }) {
-    const { data } = useQuery(GET_MY_TRIPS);
+    const { loading, data } = useQuery(GET_MY_TRIPS);
+    const myTrips = data?.getMyTrips.trips || {};
 
-    // console.log(data);
+    console.log(myTrips);
 
     return (
         <ThemeProvider theme={theme}>
@@ -63,11 +64,16 @@ function LeftPanel({ font, fontColor, setIsDisplayed }) {
                                 }}
                             >ADD TRIP</Button>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Button variant='text' fullWidth sx={{ color: `${fontColor.black}` }}>
-                                Philippines Trip
-                            </Button>
-                        </Grid>
+                        {!loading && myTrips.map((trip) => {
+                            return (
+                                <Grid key={trip._id} item xs={12}>
+                                    <input type='hidden' id={trip._id}></input>
+                                    <Button variant='text' fullWidth sx={{ color: `${fontColor.black}` }}>
+                                        {trip.tripName}
+                                    </Button>
+                                </Grid>
+                            )
+                        })}
                     </Grid>
                 </Grid>
             </Grid>
