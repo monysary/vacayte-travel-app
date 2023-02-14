@@ -29,6 +29,7 @@ const typeDefs = gql`
   type Query {
     me: User
     getMyTrips: User
+    selectTrip(_id: ID!): Trip
   }
 
   type Mutation {

@@ -29,6 +29,15 @@ const resolvers = {
       const myTrips = await User.findById(context.user._id);
 
       return myTrips;
+    },
+    selectTrip: async (parent, { _id }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      const trip = await Trip.findById(_id);
+
+      return trip;
     }
   },
   Mutation: {
@@ -77,6 +86,7 @@ const resolvers = {
         {
           $push: {
             trips: {
+              _id: newTrip._id,
               tripName: newTrip.tripName,
               location: newTrip.location,
               startDate: newTrip.startDate,

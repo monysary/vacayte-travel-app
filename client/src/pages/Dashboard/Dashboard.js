@@ -16,6 +16,9 @@ import SearchBar from '../../components/SearchBar';
 import Welcome from '../../components/Welcome';
 import AddTripForm from '../../components/AddTripForm';
 
+import { useQuery } from '@apollo/client';
+import { SELECT_TRIP } from '../../utils/queries.js';
+
 function Dashboard() {
     if (!localStorage.getItem('auth_token')) {
         window.location.assign('/');
@@ -37,16 +40,43 @@ function Dashboard() {
 
     const { data: { firstName } } = auth.getProfile();
 
+    // setState for displaying different components in dashboard
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
         addTripForm: false
     })
 
+    // Populating currently selected trip information on dashboard
+    const [selectTrip, setSelectTrip] = useState('');
+    const { loading, data } = useQuery(SELECT_TRIP, {
+        variables: { _id: selectTrip }
+    });
+    const trip = data?.selectTrip || {}
+    const startDate = new Date(trip.startDate).toLocaleDateString('en-us', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+
+    })
+    const endDate = new Date(trip.endDate).toLocaleDateString('en-us', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+
+    })
+
+    console.log(trip);
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
                 <Grid item md={2}>
-                    <LeftPanel font={font.primary} fontColor={font.color} setIsDisplayed={setIsDisplayed} />
+                    <LeftPanel
+                        font={font.primary}
+                        fontColor={font.color}
+                        setIsDisplayed={setIsDisplayed}
+                        setSelectTrip={setSelectTrip}
+                    />
                 </Grid>
                 <Grid item md={8}
                     sx={{
@@ -70,15 +100,17 @@ function Dashboard() {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
-                                    Philippines Trip
-                                </Typography>
-                                <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
-                                    Manila, Philippines
-                                </Typography>
-                                <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
-                                    March 12, 2023 - March 31, 2023
-                                </Typography>
+                                <Box>
+                                    <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
+                                        {!loading && `${trip.tripName}`}
+                                    </Typography>
+                                    <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
+                                        {!loading && `${trip.location}`}
+                                    </Typography>
+                                    <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
+                                        {!loading && `${startDate} - ${endDate}`}
+                                    </Typography>
+                                </Box>
                             </Grid>
                         </Grid>
                         <Box pt='40px' >
