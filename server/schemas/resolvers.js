@@ -1,6 +1,17 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Trip } = require("../models");
 const { signToken } = require("../utils/auth.js");
+const { GraphQLScalarType } = require('graphql');
+
+const dateResolver = new GraphQLScalarType({
+  name: "Date",
+  parseValue(value) {
+    return new Date(value);
+  },
+  serialize(value) {
+    return value.toJSON();
+  },
+});
 
 const resolvers = {
   Query: {
@@ -39,7 +50,38 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addTrip: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!')
+      }
+
+      const newTrip = await Trip.create({
+        tripName: args.tripName,
+        location: args.location,
+        startDate: args.startDate,
+        endDate: args.endDate,
+        activities: args.activities,
+      })
+
+      const updateUserTrip = await User.findByIdAndUpdate(
+        context.user._id,
+        {
+          $push: {
+            trips: {
+              tripName: newTrip.tripName,
+              location: newTrip.location,
+              startDate: newTrip.startDate,
+              endDate: newTrip.endDate,
+              activities: newTrip.activities,
+            }
+          }
+        }
+      )
+
+      return newTrip;
+    }
   },
+  Date: dateResolver,
 };
 
 module.exports = resolvers;

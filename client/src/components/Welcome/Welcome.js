@@ -50,9 +50,7 @@ function Welcome({ font, fontColor }) {
                         </Grid>
                         <Grid container justifyContent='center'>
                             <Button
-                                onClick={() => {
-                                    document.title = 'Vacayte - Add Trip'
-                                }}
+                                onClick={() => { document.title = 'Vacayte - Add Trip' }}
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >

@@ -41,6 +41,9 @@ function Dashboard() {
 
     useEffect(() => {
         switch (document.title) {
+            case 'Vacayte - Welcome':
+                setComponent(<Welcome font={font.primary} fontColor={font.color} />);
+                break;
             case 'Vacayte - Add Trip':
                 setComponent(<AddTripForm font={font.primary} fontColor={font.color} />);
                 break;

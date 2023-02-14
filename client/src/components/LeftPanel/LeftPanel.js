@@ -2,6 +2,7 @@ import {
     Grid,
     Typography,
     Button,
+    Link,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from '@mui/material/styles';
@@ -12,18 +13,22 @@ function LeftPanel({ font, fontColor }) {
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
                 <Grid item>
-                    <Typography textAlign='center'>
-                        <span style={{
-                            fontFamily: 'satisfy',
-                            fontSize: '40px',
-                            color: `${fontColor.primary}`,
-                        }}>Vacay</span>
-                        <span style={{
-                            fontFamily: 'zilla slab',
-                            fontSize: '30px',
-                            color: `${fontColor.darkGrey}`
-                        }}>te</span>
-                    </Typography>
+                    <Link sx={{ textDecoration: 'none', '&:hover': { cursor: 'pointer' } }}
+                        onClick={() => document.title = 'Vacayte - Welcome'}
+                    >
+                        <Typography textAlign='center'>
+                            <span style={{
+                                fontFamily: 'satisfy',
+                                fontSize: '40px',
+                                color: `${fontColor.primary}`,
+                            }}>Vacay</span>
+                            <span style={{
+                                fontFamily: 'zilla slab',
+                                fontSize: '30px',
+                                color: `${fontColor.darkGrey}`
+                            }}>te</span>
+                        </Typography>
+                    </Link>
                 </Grid>
                 <Grid item height='100%'>
                     <Grid container alignItems='center' p='20px 30px' gap='20px'>

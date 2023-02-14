@@ -1,24 +1,28 @@
 const { Schema, model } = require('mongoose');
 
 const tripSchema = new Schema({
-    trip_name: {
+    tripName: {
         type: String,
         required: true,
         trim: true
-    },
-    start_date: {
-        type: Date,
-        required: true
-    },
-    end_date: {
-        type: Date,
-        required: true
     },
     location: {
         type: String,
         required: true,
         trim: true
     },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: true
+    },
+    activities: [{
+        type: String,
+        required: true
+    }]
 });
 
 const Trip = model('VacayteTrip', tripSchema);

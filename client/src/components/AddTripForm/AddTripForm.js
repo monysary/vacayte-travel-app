@@ -20,6 +20,8 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import LiquorIcon from '@mui/icons-material/Liquor';
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 
+import { useMutation } from '@apollo/client';
+
 function AddTripForm({ font, fontColor }) {
     const [formState, setFormState] = useState({
         tripName: '',
