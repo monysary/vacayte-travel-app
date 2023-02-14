@@ -34,9 +34,14 @@ function LeftPanel({ font, fontColor }) {
                         </Grid>
                         <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            <Button startIcon={<AddIcon />} variant='contained' fullWidth sx={{ borderRadius: '20px' }}>
-                                ADD TRIP
-                            </Button>
+                            <Button
+                                startIcon={<AddIcon />}
+                                variant='contained'
+                                fullWidth sx={{ borderRadius: '20px' }}
+                                onClick={() => {
+                                    document.title = 'Vacayte - Add Trip'
+                                }}
+                            >ADD TRIP</Button>
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant='text' fullWidth sx={{ color: `${fontColor.black}` }}>

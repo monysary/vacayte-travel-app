@@ -9,13 +9,12 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
-function Welcome({ font, fontColor, welcomeDisplay, setWelcomeDisplay, setAddTripDisplay }) {
+function Welcome({ font, fontColor }) {
     return (
         <ThemeProvider theme={theme}>
             <Container
                 maxWidth="sm"
                 sx={{
-                    display: welcomeDisplay ? 'block' : 'none',
                     backgroundColor: '#F5F5F5',
                     borderRadius: '20px'
                 }}>
@@ -52,8 +51,7 @@ function Welcome({ font, fontColor, welcomeDisplay, setWelcomeDisplay, setAddTri
                         <Grid container justifyContent='center'>
                             <Button
                                 onClick={() => {
-                                    setWelcomeDisplay(false)
-                                    setAddTripDisplay(true)
+                                    document.title = 'Vacayte - Add Trip'
                                 }}
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}

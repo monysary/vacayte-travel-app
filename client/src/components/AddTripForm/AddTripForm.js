@@ -20,7 +20,7 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import LiquorIcon from '@mui/icons-material/Liquor';
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 
-function AddTripForm({ font, fontColor, addTripDisplay, setAddTripDisplay }) {
+function AddTripForm({ font, fontColor }) {
     const [formState, setFormState] = useState({
         tripName: '',
         location: '',
@@ -84,7 +84,7 @@ function AddTripForm({ font, fontColor, addTripDisplay, setAddTripDisplay }) {
                 <Button
                     fullWidth
                     startIcon={icon}
-                    endIcon
+                    endIcon={<></>}
                     variant='outlined'
                     color='info'
                     sx={{ justifyContent: 'space-between' }}
@@ -113,7 +113,6 @@ function AddTripForm({ font, fontColor, addTripDisplay, setAddTripDisplay }) {
                 onSubmit={handleFormSubmit}
                 maxWidth="sm"
                 sx={{
-                    display: addTripDisplay ? 'block' : 'none',
                     backgroundColor: '#F5F5F5',
                     borderRadius: '20px'
                 }}>
@@ -233,7 +232,7 @@ function AddTripForm({ font, fontColor, addTripDisplay, setAddTripDisplay }) {
                     </Typography>
                     <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2} justifyContent='center'>
-                            {activity.map((activity) => <ActivityChoices name={activity.name} icon={activity.icon} />)}
+                            {activity.map((activity) => <ActivityChoices key={activity.name} name={activity.name} icon={activity.icon} />)}
                         </Grid>
                         <Grid container justifyContent='center' gap='40px'>
                             <Button

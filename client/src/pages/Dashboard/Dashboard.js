@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
@@ -37,14 +37,24 @@ function Dashboard() {
 
     const { data: { firstName } } = auth.getProfile();
 
-    const [welcomeDisplay, setWelcomeDisplay] = useState(true);
-    const [addTripDisplay, setAddTripDisplay] = useState(false);
+    const [component, setComponent] = useState(null)
+
+    useEffect(() => {
+        switch (document.title) {
+            case 'Vacayte - Add Trip':
+                setComponent(<AddTripForm font={font.primary} fontColor={font.color} />);
+                break;
+            default:
+                setComponent(<Welcome font={font.primary} fontColor={font.color} />);
+                break;
+        }
+    }, [document.title, font.primary, font.color])
 
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
                 <Grid item md={2}>
-                    <LeftPanel font={font.primary} fontColor={font.color}/>
+                    <LeftPanel font={font.primary} fontColor={font.color} />
                 </Grid>
                 <Grid item md={8}
                     sx={{
@@ -56,7 +66,7 @@ function Dashboard() {
                 >
                     <Box height='100vh' overflow='auto'>
                         <Box p='30px 20% 20px'>
-                            <SearchBar font={font.primary} fontColor={font.color}/>
+                            <SearchBar font={font.primary} fontColor={font.color} />
                         </Box>
                         <Grid container wrap='nowrap' justifyContent='space-between' px='40px'>
                             <Grid item>
@@ -67,9 +77,9 @@ function Dashboard() {
                                     Let's make some memories!
                                 </Typography>
                             </Grid>
-                            <Grid item> 
+                            <Grid item>
                                 <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
-                                    Philippines Trip    
+                                    Philippines Trip
                                 </Typography>
                                 <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
                                     Manila, Philippines
@@ -80,13 +90,12 @@ function Dashboard() {
                             </Grid>
                         </Grid>
                         <Box pt='40px' >
-                            <Welcome font={font.primary} fontColor={font.color} welcomeDisplay={welcomeDisplay} setWelcomeDisplay={setWelcomeDisplay} setAddTripDisplay={setAddTripDisplay}/>
-                            <AddTripForm font={font.primary} fontColor={font.color} addTripDisplay={addTripDisplay} setAddTripDisplay={setAddTripDisplay}/>
+                            {component}
                         </Box>
                     </Box>
                 </Grid>
                 <Grid item md={2}>
-                    <RightPanel font={font.primary} fontColor={font.color}/>
+                    <RightPanel font={font.primary} fontColor={font.color} />
                 </Grid>
             </Grid>
         </ThemeProvider>
