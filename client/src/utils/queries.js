@@ -4,18 +4,33 @@ export const QUERY_ME = gql`
   query Me {
     me {
       _id
-      email
       firstName
       lastName
+      email
       password
       trips {
         _id
-        activities
-        endDate
+        tripName
         location
         startDate
-        tripName
+        endDate
+        activities
       }
     }
   }
 `;
+
+export const GET_MY_TRIPS = gql`
+  query GetMyTrips {
+    getMyTrips {
+      trips {
+        _id
+        tripName
+        startDate
+        endDate
+        location
+        activities
+      }
+    }
+  }
+`

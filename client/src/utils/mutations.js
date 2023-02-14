@@ -32,11 +32,11 @@ export const ADD_TRIP = gql`
   mutation addTrip($tripName: String!, $location: String!, $startDate: Date!, $endDate: Date!, $activities: [String]!) {
     addTrip(tripName: $tripName, location: $location, startDate: $startDate, endDate: $endDate, activities: $activities) {
       _id
-      activities
-      endDate
+      tripName
       location
       startDate
-      tripName
+      endDate
+      activities
     }
 }
 `

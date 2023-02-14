@@ -21,6 +21,15 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    getMyTrips: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      const myTrips = await User.findById(context.user._id);
+
+      return myTrips;
+    }
   },
   Mutation: {
     register: async (parent, { firstName, lastName, email, password }) => {
