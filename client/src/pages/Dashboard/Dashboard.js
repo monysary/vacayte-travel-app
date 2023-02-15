@@ -65,8 +65,6 @@ function Dashboard() {
 
     })
 
-    console.log(trip);
-
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
@@ -100,7 +98,7 @@ function Dashboard() {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Box>
+                                <Box sx={{ display: selectTrip === '' ? 'none' : 'block'}}>
                                     <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
                                         {!loading && `${trip.tripName}`}
                                     </Typography>

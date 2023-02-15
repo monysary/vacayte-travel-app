@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Container,
     CssBaseline,
@@ -21,6 +21,9 @@ import LiquorIcon from '@mui/icons-material/Liquor';
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 
 import { useMutation } from '@apollo/client';
+import { ADD_TRIP } from '../../utils/mutations.js';
+
+
 
 function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
     const [formState, setFormState] = useState({
@@ -31,6 +34,54 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
         activities: [],
     });
 
+    const [activity, setActivity] = useState([
+        {
+            name: 'Restaurant',
+            icon: <RestaurantIcon />,
+            selected: false,
+        },
+        {
+            name: 'Relaxation',
+            icon: <SpaIcon />,
+            selected: false,
+        },
+        {
+            name: 'Shopping',
+            icon: <LocalMallIcon />,
+            selected: false,
+        },
+        {
+            name: 'Tours',
+            icon: <TourIcon />,
+            selected: false,
+        },
+        {
+            name: 'Beaches',
+            icon: <BeachAccessIcon />,
+            selected: false,
+        },
+        {
+            name: 'Hiking',
+            icon: <HikingIcon />,
+            selected: false,
+        },
+        {
+            name: 'Sight Seeing',
+            icon: <LandscapeIcon />,
+            selected: false,
+        },
+        {
+            name: 'Drinks',
+            icon: <LiquorIcon />,
+            selected: false,
+        },
+        {
+            name: 'Fine Dining',
+            icon: <DinnerDiningIcon />,
+            selected: false,
+        },
+    ]);
+
     const handleInputChange = ({ target: { name, value } }) => {
         setFormState({ ...formState, [name]: value });
     };
@@ -38,59 +89,63 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        console.log('Form Submitted!');
+        // await addingTrip();
+
+        clearButton();
+
+        console.log(formState);
+        console.log(activity);
     };
 
-    const activity = [
-        {
-            name: 'Restaurant',
-            icon: <RestaurantIcon />
-        },
-        {
-            name: 'Relaxation',
-            icon: <SpaIcon />
-        },
-        {
-            name: 'Shopping',
-            icon: <LocalMallIcon />
-        },
-        {
-            name: 'Tours',
-            icon: <TourIcon />
-        },
-        {
-            name: 'Beaches',
-            icon: <BeachAccessIcon />
-        },
-        {
-            name: 'Hiking',
-            icon: <HikingIcon />
-        },
-        {
-            name: 'Sight Seeing',
-            icon: <LandscapeIcon />
-        },
-        {
-            name: 'Drinks',
-            icon: <LiquorIcon />
-        },
-        {
-            name: 'Fine Dining',
-            icon: <DinnerDiningIcon />
-        },
-    ]
+    // Adding a trip through the trip form
+    const [addTrip] = useMutation(ADD_TRIP);
+    const addingTrip = async () => {
+        const addedTrip = await addTrip({
+            variables: {
+                tripName: formState.tripName,
+                location: formState.location,
+                startDate: formState.startDate,
+                endDate: formState.endDate,
+                activities: formState.activities,
+            }
+        })
 
-    function ActivityChoices({ name, icon }) {
+    };
+
+    function ActivityChoices({ activityName, icon, selected, setActivity, setFormState }) {
+        const handleClick = () => {
+            if (!selected) {
+                setFormState({ ...formState, activities: [...formState.activities, activityName] })
+                setActivity(activity.map((activity) => {
+                    if (activity.name === activityName) {
+                        return {...activity, selected: true}
+                    } else {
+                        return activity
+                    }
+                }))
+            } else {
+                setFormState({...formState, activities: formState.activities.filter((activity) => activity !== activityName)})
+                setActivity(activity.map((activity) => {
+                    if (activity.name === activityName) {
+                        return {...activity, selected: false}
+                    } else {
+                        return activity
+                    }
+                }))
+            }
+        }
+
         return (
             <Grid item xs={7}>
                 <Button
                     fullWidth
                     startIcon={icon}
                     endIcon={<></>}
-                    variant='outlined'
-                    color='info'
                     sx={{ justifyContent: 'space-between' }}
-                >{name}</Button>
+                    variant={selected ? 'contained' : 'outlined'}
+                    color={selected ? 'secondary' : 'info'}
+                    onClick={handleClick}
+                >{activityName}</Button>
             </Grid>
         )
     }
@@ -102,6 +157,7 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
             location: '',
             startDate: '',
             endDate: '',
+            activities: [],
         })
     }
 
@@ -116,11 +172,11 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                 maxWidth="sm"
                 sx={{
                     backgroundColor: '#F5F5F5',
-                    borderRadius: '20px'
+                    borderRadius: '20px',
                 }}>
                 <CssBaseline />
                 {/* -----Trip Information----- */}
-                <Box sx={{display: isDisplayed.addTripForm ? 'block' : 'none'}}>
+                <Box sx={{ display: isDisplayed.addTripForm ? 'block' : 'none' }}>
                     <Box
                         sx={{
                             display: next ? 'flex' : 'none',
@@ -156,7 +212,7 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                                     <TextField
                                         required
                                         fullWidth
-                                        placeholder="Location"
+                                        placeholder="City, State, Country"
                                         name="location"
                                         type='text'
                                         value={formState.location}
@@ -175,7 +231,7 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                                         fullWidth
                                         placeholder="MM/DD/YYYY"
                                         name="startDate"
-                                        type='text'
+                                        type='date'
                                         value={formState.startDate}
                                         onChange={handleInputChange}
                                         inputProps={{
@@ -192,7 +248,7 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                                         fullWidth
                                         placeholder="MM/DD/YYYY"
                                         name="endDate"
-                                        type='text'
+                                        type='date'
                                         value={formState.endDate}
                                         onChange={handleInputChange}
                                         inputProps={{
@@ -235,7 +291,14 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                         </Typography>
                         <Box sx={{ mt: 3 }}>
                             <Grid container spacing={2} justifyContent='center'>
-                                {activity.map((activity) => <ActivityChoices key={activity.name} name={activity.name} icon={activity.icon} />)}
+                                {activity.map((activity) => <ActivityChoices
+                                    key={activity.name}
+                                    activityName={activity.name}
+                                    icon={activity.icon}
+                                    selected={activity.selected}
+                                    setActivity={setActivity}
+                                    setFormState={setFormState}
+                                />)}
                             </Grid>
                             <Grid container justifyContent='center' gap='40px'>
                                 <Button
