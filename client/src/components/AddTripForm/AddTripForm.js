@@ -94,7 +94,6 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
         clearButton();
 
         console.log(formState);
-        console.log(activity);
     };
 
     // Adding a trip through the trip form
@@ -118,16 +117,16 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                 setFormState({ ...formState, activities: [...formState.activities, activityName] })
                 setActivity(activity.map((activity) => {
                     if (activity.name === activityName) {
-                        return {...activity, selected: true}
+                        return { ...activity, selected: true }
                     } else {
                         return activity
                     }
                 }))
             } else {
-                setFormState({...formState, activities: formState.activities.filter((activity) => activity !== activityName)})
+                setFormState({ ...formState, activities: formState.activities.filter((activity) => activity !== activityName) })
                 setActivity(activity.map((activity) => {
                     if (activity.name === activityName) {
-                        return {...activity, selected: false}
+                        return { ...activity, selected: false }
                     } else {
                         return activity
                     }
@@ -162,6 +161,7 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
     }
 
     const [next, setNext] = useState(true)
+    const [showError, setShowError] = useState(false)
 
     return (
         <ThemeProvider theme={theme}>
@@ -268,13 +268,28 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                                     Clear
                                 </Button>
                                 <Button
-                                    onClick={() => setNext(!next)}
+                                    onClick={() => {
+                                        if (
+                                            formState.tripName === '' ||
+                                            formState.location === '' ||
+                                            formState.startDate === '' ||
+                                            formState.endDate === ''
+                                        ) {
+                                            setShowError(true)
+                                        } else {
+                                            setShowError(false)
+                                            setNext(!next)
+                                        }
+                                    }}
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
                                     Next
                                 </Button>
                             </Grid>
+                            <Typography textAlign='center' color='error'>{
+                                showError ? 'Please complete the form!' : ''
+                            }</Typography>
                         </Box>
                     </Box>
                     {/* -----Trip Activities----- */}
