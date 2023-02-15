@@ -25,7 +25,7 @@ import { ADD_TRIP } from '../../utils/mutations.js';
 
 
 
-function AddTripForm({ font, fontColor, isDisplayed }) {
+function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
     const [formState, setFormState] = useState({
         tripName: '',
         location: '',
@@ -91,6 +91,8 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
 
         await addingTrip();
 
+        setFormFinish(true)
+
         clearButton();
     };
 
@@ -106,9 +108,15 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
                 activities: formState.activities,
             }
         })
+
         console.log(addedTrip);
         return addedTrip;
     };
+
+    useEffect(() => {
+        setFormFinish(false)
+        setNext(true)
+    }, [isDisplayed])
 
     function ActivityChoices({ activityName, icon, selected, setActivity, setFormState }) {
         const handleClick = () => {
@@ -161,6 +169,7 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
 
     const [next, setNext] = useState(true)
     const [showError, setShowError] = useState(false)
+    const [formFinish, setFormFinish] = useState(false)
 
     return (
         <ThemeProvider theme={theme}>
@@ -174,8 +183,8 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
                     borderRadius: '20px',
                 }}>
                 <CssBaseline />
-                {/* -----Trip Information----- */}
                 <Box sx={{ display: isDisplayed.addTripForm ? 'block' : 'none' }}>
+                    {/* -----Trip Information----- */}
                     <Box
                         sx={{
                             display: next ? 'flex' : 'none',
@@ -279,6 +288,7 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
                                             setShowError(false)
                                             setNext(!next)
                                         }
+                                        setNext(!next)
                                     }}
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
@@ -303,6 +313,11 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
                         <Typography component="h2" variant="h4" fontFamily={font}>
                             Activities
                         </Typography>
+                        <Typography variant='h5' fontFamily={font} color={fontColor.primary}
+                            sx={{display: formFinish ? 'block' : 'none'}}
+                        >
+                            New trip created!
+                        </Typography>
                         <Box sx={{ mt: 3 }}>
                             <Grid container spacing={2} justifyContent='center'>
                                 {activity.map((activity) => <ActivityChoices
@@ -326,6 +341,7 @@ function AddTripForm({ font, fontColor, isDisplayed }) {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
+                                    disabled={formFinish}
                                 >
                                     Finish
                                 </Button>

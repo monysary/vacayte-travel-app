@@ -43,7 +43,7 @@ function Dashboard() {
     // setState for displaying different components in dashboard
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
-        addTripForm: false
+        addTripForm: false,
     })
 
     // Populating currently selected trip information on dashboard
@@ -72,6 +72,7 @@ function Dashboard() {
                     <LeftPanel
                         font={font.primary}
                         fontColor={font.color}
+                        isDisplayed={isDisplayed}
                         setIsDisplayed={setIsDisplayed}
                         setSelectTrip={setSelectTrip}
                         tripName={!loading && trip.tripName}
@@ -123,6 +124,7 @@ function Dashboard() {
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
+                                setIsDisplayed={setIsDisplayed}
                             />
                         </Box>
                     </Box>

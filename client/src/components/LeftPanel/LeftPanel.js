@@ -13,7 +13,7 @@ import { theme } from '../../App.js'
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { GET_MY_TRIPS } from '../../utils/queries.js';
 
-function LeftPanel({ font, fontColor, setIsDisplayed, setSelectTrip, tripName }) {
+function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName }) {
     const [tripList, setTripList] = useState([]);
 
     const [loadGetMyTrips, { loading, data }] = useLazyQuery(GET_MY_TRIPS);
@@ -32,7 +32,11 @@ function LeftPanel({ font, fontColor, setIsDisplayed, setSelectTrip, tripName })
                     <Button
                         variant={trip.tripName === tripName ? 'outlined' : 'text'}
                         fullWidth
-                        sx={{ color: `${fontColor.black}`, border: trip.tripName === tripName ? `2px solid ${fontColor.primary}` : 'none' }}
+                        sx={{
+                            color: `${fontColor.black}`,
+                            padding: '10px 0px',
+                            border: trip.tripName === tripName ? `2px solid ${fontColor.primary}` : 'none'
+                        }}
                         onClick={() => setSelectTrip(`${trip._id}`)}
                     >
                         {trip.tripName}
@@ -86,8 +90,9 @@ function LeftPanel({ font, fontColor, setIsDisplayed, setSelectTrip, tripName })
                                     fullWidth sx={{ borderRadius: '20px' }}
                                     onClick={() => {
                                         setIsDisplayed({
+                                            ...isDisplayed,
                                             welcome: false,
-                                            addTripForm: true
+                                            addTripForm: true,
                                         })
                                     }}
                                 >ADD TRIP</Button>

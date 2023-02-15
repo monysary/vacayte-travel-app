@@ -52,8 +52,9 @@ function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
                             <Button
                                 onClick={() => {
                                     setIsDisplayed({
+                                        ...isDisplayed,
                                         welcome: false,
-                                        addTripForm: true
+                                        addTripForm: true,
                                     })
                                 }}
                                 variant="contained"
