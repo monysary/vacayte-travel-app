@@ -25,7 +25,7 @@ import { ADD_TRIP } from '../../utils/mutations.js';
 
 
 
-function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
+function AddTripForm({ font, fontColor, isDisplayed }) {
     const [formState, setFormState] = useState({
         tripName: '',
         location: '',
@@ -89,11 +89,9 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // await addingTrip();
+        await addingTrip();
 
         clearButton();
-
-        console.log(formState);
     };
 
     // Adding a trip through the trip form
@@ -108,7 +106,8 @@ function AddTripForm({ font, fontColor, isDisplayed, setIsDisplayed }) {
                 activities: formState.activities,
             }
         })
-
+        console.log(addedTrip);
+        return addedTrip;
     };
 
     function ActivityChoices({ activityName, icon, selected, setActivity, setFormState }) {

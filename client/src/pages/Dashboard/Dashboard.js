@@ -74,6 +74,7 @@ function Dashboard() {
                         fontColor={font.color}
                         setIsDisplayed={setIsDisplayed}
                         setSelectTrip={setSelectTrip}
+                        tripName={!loading && trip.tripName}
                     />
                 </Grid>
                 <Grid item md={8}
@@ -98,7 +99,7 @@ function Dashboard() {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Box sx={{ display: selectTrip === '' ? 'none' : 'block'}}>
+                                <Box sx={{ display: selectTrip === '' ? 'none' : 'block' }}>
                                     <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
                                         {!loading && `${trip.tripName}`}
                                     </Typography>
@@ -112,8 +113,17 @@ function Dashboard() {
                             </Grid>
                         </Grid>
                         <Box pt='40px' >
-                            <Welcome font={font.primary} fontColor={font.color} isDisplayed={isDisplayed} setIsDisplayed={setIsDisplayed} />
-                            <AddTripForm font={font.primary} fontColor={font.color} isDisplayed={isDisplayed} setIsDisplayed={setIsDisplayed} />
+                            <Welcome
+                                font={font.primary}
+                                fontColor={font.color}
+                                isDisplayed={isDisplayed}
+                                setIsDisplayed={setIsDisplayed}
+                            />
+                            <AddTripForm
+                                font={font.primary}
+                                fontColor={font.color}
+                                isDisplayed={isDisplayed}
+                            />
                         </Box>
                     </Box>
                 </Grid>

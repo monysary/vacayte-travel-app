@@ -12,10 +12,12 @@ function RightPanel({ font, fontColor }) {
     return (
         <ThemeProvider theme={theme}>
             <Grid container justifyContent='center' py='30px' gap='30px'>
-                <Grid item>
-                    <Button variant='outlined' onClick={() => auth.logout()}>
-                        Logout
-                    </Button>
+                <Grid item height='60px'>
+                    <Grid container height='100%' alignItems='center'>
+                        <Button variant='outlined' onClick={() => auth.logout()}>
+                            Logout
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid item height='100%'>
                     <Grid container alignItems='center' p='20px 30px' gap='20px'>
