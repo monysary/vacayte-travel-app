@@ -16,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName }) {
     const { loading, data } = useQuery(GET_MY_TRIPS);
-    const myTrips = data?.getMyTrips.trips || {};
+    const myTrips = data?.getMyTrips.trips || [];
 
     function TripsButton() {
         if (!loading) {
@@ -43,7 +43,7 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ height: '100vh' }}>
+            <Box sx={{ height: '100vh', overflow: 'auto' }}>
                 <Grid container justifyContent='center' py='30px' gap='30px'>
                     <Grid item>
                         <Link sx={{ textDecoration: 'none', '&:hover': { cursor: 'pointer' } }}
@@ -84,8 +84,10 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                                     >ADD TRIP</Button>
                                 </RouterLink>
                             </Grid>
-                            <Grid item xs={12} overflow='auto'>
-                                <TripsButton />
+                            <Grid item xs={12}>
+                                <Grid container direction='column-reverse'>
+                                    <TripsButton />
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
