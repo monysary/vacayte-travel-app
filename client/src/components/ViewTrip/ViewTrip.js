@@ -3,6 +3,7 @@ import {
     Box,
     Grid,
     Typography,
+    CircularProgress
 } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
@@ -88,7 +89,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
                                     price={business.price}
                                     categories={business.categories}
                                 />
-                            ) : ''}
+                            ) : <CircularProgress />}
                         </Grid>
                     </Grid>
                 </Grid>
