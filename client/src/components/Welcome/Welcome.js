@@ -9,6 +9,8 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
     return (
         <ThemeProvider theme={theme}>
@@ -49,19 +51,14 @@ function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
                             </Typography>
                         </Grid>
                         <Grid container justifyContent='center'>
-                            <Button
-                                onClick={() => {
-                                    setIsDisplayed({
-                                        ...isDisplayed,
-                                        welcome: false,
-                                        addTripForm: true,
-                                    })
-                                }}
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Start
-                            </Button>
+                            <RouterLink to='/add-trip' style={{ textDecoration: 'none' }}>
+                                <Button
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Create Trip
+                                </Button>
+                            </RouterLink>
                         </Grid>
                     </Box>
                 </Box>

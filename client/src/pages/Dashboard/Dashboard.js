@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
-    Box
+    Box,
+    Button
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
@@ -14,10 +15,21 @@ import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
 import SearchBar from '../../components/SearchBar';
 import Welcome from '../../components/Welcome';
-import AddTripForm from '../../components/AddTripForm';
 
 import { useQuery } from '@apollo/client';
 import { SELECT_TRIP } from '../../utils/queries.js';
+
+export const font = {
+    primary: 'Josefin Sans',
+    color: {
+        primary: '#569597',
+        secondary: '#D9BEAA',
+        white: '#F5F5F5',
+        black: '#252525',
+        grey: '#B2B2B2',
+        darkGrey: '#606060'
+    }
+}
 
 function Dashboard() {
     if (!localStorage.getItem('auth_token')) {
@@ -26,24 +38,11 @@ function Dashboard() {
         auth.logout();
     }
 
-    const font = {
-        primary: 'Josefin Sans',
-        color: {
-            primary: '#569597',
-            secondary: '#D9BEAA',
-            white: '#F5F5F5',
-            black: '#252525',
-            grey: '#B2B2B2',
-            darkGrey: '#606060'
-        }
-    }
-
     const { data: { firstName } } = auth.getProfile();
 
     // setState for displaying different components in dashboard
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
-        addTripForm: false,
     })
 
     // Populating currently selected trip information on dashboard
@@ -115,12 +114,6 @@ function Dashboard() {
                         </Grid>
                         <Box pt='40px' >
                             <Welcome
-                                font={font.primary}
-                                fontColor={font.color}
-                                isDisplayed={isDisplayed}
-                                setIsDisplayed={setIsDisplayed}
-                            />
-                            <AddTripForm
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}

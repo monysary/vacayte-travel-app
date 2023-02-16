@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
@@ -10,24 +9,18 @@ import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_MY_TRIPS } from '../../utils/queries.js';
 
-function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName }) {
-    const [tripList, setTripList] = useState([]);
+import { Link as RouterLink } from 'react-router-dom';
 
-    const [loadGetMyTrips, { loading, data }] = useLazyQuery(GET_MY_TRIPS);
+function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName }) {
+    const { loading, data } = useQuery(GET_MY_TRIPS);
     const myTrips = data?.getMyTrips.trips || {};
 
-    useEffect(async () => {
-        await loadGetMyTrips()
-        setTripList(myTrips)
-
-    }, [myTrips, loadGetMyTrips])
-
     function TripsButton() {
-        if (!loading && tripList.length > 0) {
-            return tripList.map((trip) =>
+        if (!loading) {
+            return myTrips.map((trip) =>
                 <Grid key={trip._id} item xs={12}>
                     <Button
                         variant={trip.tripName === tripName ? 'outlined' : 'text'}
@@ -57,7 +50,6 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                             onClick={() => {
                                 setIsDisplayed({
                                     welcome: true,
-                                    addTripForm: false
                                 })
                             }}
                         >
@@ -84,18 +76,13 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                             </Grid>
                             <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                             <Grid item xs={12}>
-                                <Button
-                                    startIcon={<AddIcon />}
-                                    variant='contained'
-                                    fullWidth sx={{ borderRadius: '20px' }}
-                                    onClick={() => {
-                                        setIsDisplayed({
-                                            ...isDisplayed,
-                                            welcome: false,
-                                            addTripForm: true,
-                                        })
-                                    }}
-                                >ADD TRIP</Button>
+                                <RouterLink to={'/add-trip'} style={{ textDecoration: 'none' }}>
+                                    <Button
+                                        startIcon={<AddIcon />}
+                                        variant='contained'
+                                        fullWidth sx={{ borderRadius: '20px' }}
+                                    >ADD TRIP</Button>
+                                </RouterLink>
                             </Grid>
                             <Grid item xs={12} overflow='auto'>
                                 <TripsButton />

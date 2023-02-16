@@ -2,9 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Satisfy');
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab');
 
-html,
 body {
     margin: 0;
-    background-color: #F9F9F9;
+    background-color: #F5F5F5;
     height: 100vh;
 }
