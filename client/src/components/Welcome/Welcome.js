@@ -47,7 +47,7 @@ function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
                                 This web app was designed to be a one stop shop location for users to search for places to eat or things to do on their next vacation,
                                 then create an itinerary with ease.
                                 The app is powered by Yelp, with searches and information being pulled from their database for display.
-                                Start making memories by clicking on the button below or clicking the ADD TRIP button to create your next trip!
+                                Start making memories by clicking on the button below or clicking the CREATE TRIP button to create your next trip!
                             </Typography>
                         </Grid>
                         <Grid container justifyContent='center'>

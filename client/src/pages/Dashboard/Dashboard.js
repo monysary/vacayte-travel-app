@@ -3,7 +3,6 @@ import {
     Grid,
     Typography,
     Box,
-    Button
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
@@ -15,6 +14,7 @@ import LeftPanel from '../../components/LeftPanel';
 import RightPanel from '../../components/RightPanel';
 import SearchBar from '../../components/SearchBar';
 import Welcome from '../../components/Welcome';
+import ViewTrip from '../../components/ViewTrip';
 
 import { useQuery } from '@apollo/client';
 import { SELECT_TRIP } from '../../utils/queries.js';
@@ -43,6 +43,7 @@ function Dashboard() {
     // setState for displaying different components in dashboard
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
+        viewTrip: false,
     })
 
     // Populating currently selected trip information on dashboard
@@ -63,6 +64,8 @@ function Dashboard() {
         year: 'numeric',
 
     })
+
+    console.log(data);
 
     return (
         <ThemeProvider theme={theme}>
@@ -114,6 +117,12 @@ function Dashboard() {
                         </Grid>
                         <Box pt='40px' >
                             <Welcome
+                                font={font.primary}
+                                fontColor={font.color}
+                                isDisplayed={isDisplayed}
+                                setIsDisplayed={setIsDisplayed}
+                            />
+                            <ViewTrip
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}

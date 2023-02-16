@@ -30,7 +30,14 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                             padding: '10px 0px',
                             border: trip.tripName === tripName ? `2px solid ${fontColor.primary}` : 'none'
                         }}
-                        onClick={() => setSelectTrip(`${trip._id}`)}
+                        onClick={() => {
+                            setSelectTrip(`${trip._id}`)
+                            setIsDisplayed({
+                                ...isDisplayed,
+                                welcome: false,
+                                viewTrip: true,
+                            })
+                        }}
                     >
                         {trip.tripName}
                     </Button>
