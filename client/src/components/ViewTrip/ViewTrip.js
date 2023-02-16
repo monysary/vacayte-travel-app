@@ -32,7 +32,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
         useEffect(() => {
             const fetchYelp = async () => {
                 const data = await yelpLocationTerm(activityName)
-                setYelpData(data? data : null)
+                setYelpData(data?.businesses || null)
             };
 
             fetchYelp()
@@ -41,6 +41,28 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
 
         if (yelpData) {
             console.log(yelpData);
+        }
+
+        function YelpEntry({ name, image, rating, price, categories }) {
+            const categoryArr = [];
+            categories.map((c) => categoryArr.push(c.title))
+            console.log(categoryArr);
+
+            return (
+                <Box maxWidth='200px'>
+                    <img src={`${image}`} width='200px' height='200px' />
+                    <Typography
+                        fontSize='14px'
+                        fontFamily={font}
+                        fontWeight='bold'
+                    >{name} • {rating}★</Typography>
+                    <Typography
+                        fontSize='14px'
+                        fontFamily={font}
+                        color={fontColor.grey}
+                    >{price} • {categoryArr.join(', ')}</Typography>
+                </Box>
+            )
         }
 
         if (tripData.activities.length > 0) {
@@ -56,23 +78,24 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
                         {activityName}
                     </Typography>
                     <Grid container wrap="nowrap" overflow='auto'>
-                        <Typography>
-                            {yelpData ? yelpData.businesses.map((business) => business.name) : ''}
-                        </Typography>
+                        <Grid container wrap="nowrap" gap={3}>
+                            {yelpData ? yelpData.map((business) =>
+                                <YelpEntry
+                                    key={business.id}
+                                    name={business.name}
+                                    image={business.image_url}
+                                    rating={business.rating}
+                                    price={business.price}
+                                    categories={business.categories}
+                                />
+                            ) : ''}
+                        </Grid>
                     </Grid>
                 </Grid>
             )
         } else {
             return (<></>)
         }
-    }
-
-    function YelpEntry() {
-        return(
-            <Grid>
-                
-            </Grid>
-        )
     }
 
     return (

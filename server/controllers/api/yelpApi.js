@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 router.get('/', async (req, res) => {
     const { location, term } = req.query;
-    const yelpEndpoint = `https://api.yelp.com/v3/businesses/search?limit=10&location=${location}&term=${term}&sort_by=rating`;
+    const yelpEndpoint = `https://api.yelp.com/v3/businesses/search?limit=5&location=${location}&term=${term}&sort_by=rating`;
     const yelpAPIKey = process.env.YELP_KEY;
 
     try {
