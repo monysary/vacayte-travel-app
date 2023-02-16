@@ -3,8 +3,7 @@ import {
     Box,
     Grid,
     Typography,
-    CircularProgress,
-    Button
+    CircularProgress
 } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
@@ -45,20 +44,14 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
             console.log(yelpData);
         }
 
-        function YelpEntry({ name, image, rating, price, categories, distance, url }) {
+        function YelpEntry({ name, image, rating, price, categories, distance }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
+            console.log(categoryArr);
 
             return (
                 <Box maxWidth='200px'>
-                    <img
-                        src={`${image}`}
-                        width='200px'
-                        height='200px'
-                        style={{ borderRadius: '10px', cursor: 'pointer' }}
-
-                        onClick={() => window.open(`${url}`, '_blank')}
-                    />
+                    <img src={`${image}`} width='200px' height='200px' />
                     <Grid container wrap="nowrap" justifyContent='space-between'>
                         <Typography
                             fontSize='14px'
@@ -72,7 +65,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
                             fontFamily={font}
                             color={fontColor.grey}
                             textAlign='right'
-
+                            
                         >{Math.round(distance * 0.000621371 * 10) / 10} mi</Grid>
 
                     </Grid>
@@ -108,7 +101,6 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
                                     price={business.price}
                                     categories={business.categories}
                                     distance={business.distance}
-                                    url={business.url}
                                 />
                             ) : <CircularProgress />}
                         </Grid>
