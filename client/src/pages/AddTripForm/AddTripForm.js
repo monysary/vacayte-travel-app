@@ -7,6 +7,9 @@ import {
     TextField,
     Button,
 } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -86,7 +89,13 @@ function AddTripForm() {
 
     const handleInputChange = ({ target: { name, value } }) => {
         setFormState({ ...formState, [name]: value });
+        console.log(formState);
     };
+
+    const handleStartDateInput = (value) => {
+        setFormState({ ...formState, startDate: value.toISOString() })
+        console.log(formState);
+    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -267,44 +276,49 @@ function AddTripForm() {
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Typography fontFamily={font.primary}>Start Date</Typography>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        placeholder="MM/DD/YYYY"
-                                        name="startDate"
-                                        type='date'
-                                        value={formState.startDate}
-                                        onChange={handleInputChange}
-                                        inputProps={{
-                                            style: {
-                                                padding: '10px'
-                                            }
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Typography fontFamily={font.primary}>End Date</Typography>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        placeholder="MM/DD/YYYY"
-                                        name="endDate"
-                                        type='date'
-                                        value={formState.endDate}
-                                        onChange={handleInputChange}
-                                        inputProps={{
-                                            style: {
-                                                padding: '10px'
-                                            }
-                                        }}
-                                    />
-                                </Grid>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Grid item xs={12} md={6}>
+                                        <Typography fontFamily={font.primary}>Start Date</Typography>
+                                        <DesktopDatePicker
+                                            inputFormat='MM/DD/YYYY'
+                                            value={formState.startDate}
+                                            onChange={handleStartDateInput}
+                                            renderInput={(params) => <TextField {...params} />}
+                                            inputProps={{
+                                                style: {
+                                                    padding: '10px'
+                                                }
+                                            }}
+                                        />
+                                        <TextField
+                                            name='startDate'
+                                            type='date'
+                                            value={formState.startDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Typography fontFamily={font.primary}>End Date</Typography>
+                                        <DesktopDatePicker
+                                            inputFormat='MM/DD/YYYY'
+                                            value={formState.endDate}
+                                            onChange={handleInputChange}
+                                            renderInput={(params) => <TextField {...params} />}
+                                            inputProps={{
+                                                style: {
+                                                    padding: '10px'
+                                                }
+                                            }}
+                                        />
+                                    </Grid>
+                                </LocalizationProvider>
                             </Grid>
                         </Box>
                         <Typography component="h2" variant="h5" fontFamily={font.primary} mt='20px'>
                             Activities
+                        </Typography>
+                        <Typography variant='subtitle1' fontFamily={font.primary} color={font.color.grey} textAlign='center'>
+                            {/* Some message to let them know they can customize their trip later */}
                         </Typography>
                         <Box>
                             <Grid container direction='column' gap='10px'>
