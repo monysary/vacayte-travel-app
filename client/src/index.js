@@ -34,21 +34,6 @@ ReactDOM.render(
 //   }
 // }
 
-// Fetch Yelp data by location and term
-// const yelpLocationTerm = async (event) => {
-//   event.preventDefault();
-
-//   try {
-//     const response = await fetch(`http://localhost:3000/api/yelp?location=${formState.location}&term=${formState.term}`);
-
-//     const data = await response.json();
-
-//     console.log(data);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 // Fetch Yelp data by business alias
 // const yelpBusinessAlias = async (event) => {
 //   event.preventDefault();
