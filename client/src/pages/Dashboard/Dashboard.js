@@ -65,8 +65,6 @@ function Dashboard() {
 
     })
 
-    console.log(data);
-
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
@@ -127,6 +125,7 @@ function Dashboard() {
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
                                 setIsDisplayed={setIsDisplayed}
+                                tripInfo={trip}
                             />
                         </Box>
                     </Box>
