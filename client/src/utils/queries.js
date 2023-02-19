@@ -14,7 +14,10 @@ export const QUERY_ME = gql`
         location
         startDate
         endDate
-        activities
+        activities {
+          name
+          saved
+        }
       }
     }
   }
@@ -26,10 +29,13 @@ export const GET_MY_TRIPS = gql`
       trips {
         _id
         tripName
+        location
         startDate
         endDate
-        location
-        activities
+        activities {
+          name
+          saved
+        }
       }
     }
   }
@@ -43,7 +49,10 @@ export const SELECT_TRIP = gql`
       location
       startDate
       endDate
-      activities
+      activities {
+        name
+        saved
+      }
     }
   }
 `

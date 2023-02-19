@@ -3,12 +3,14 @@ import {
     Box,
     Grid,
     Typography,
-    CircularProgress
+    CircularProgress,
+    IconButton
 } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
-function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, loading }) {
+function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
     // Creating object with trip data
     const tripData = {
         tripName: tripInfo?.tripName || '',
@@ -40,14 +42,13 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
 
         }, [activityName])
 
-        if (yelpData) {
-            console.log(yelpData);
-        }
+        // if (yelpData) {
+        //     console.log(yelpData);
+        // }
 
         function YelpEntry({ name, image, rating, price, categories, distance, url }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
-            console.log(categoryArr);
 
             return (
                 <Box maxWidth='200px'>
@@ -92,9 +93,22 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
                         padding: '10px 20px'
                     }}
                 >
-                    <Typography component="h2" variant="h5" fontFamily={font}>
-                        {activityName}
-                    </Typography>
+                    <Grid container justifyContent='space-between' wrap='nowrap'>
+                        <Typography component="h2" variant="h5" fontFamily={font}>
+                            {activityName}
+                        </Typography>
+                        {/* <IconButton
+                            disableTouchRipple
+                            sx={{
+                                paddingTop: '0px',
+                                '&:hover': {
+                                    background: 'none'
+                                }
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton> */}
+                    </Grid>
                     <Grid container wrap="nowrap" overflow='auto'>
                         <Grid container wrap="nowrap" gap={3}>
                             {yelpData ? yelpData.map((business) =>
@@ -122,11 +136,12 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo, load
         <ThemeProvider theme={theme}>
             <Box sx={{
                 marginX: '40px',
+                paddingBottom: '40px',
                 display: isDisplayed.viewTrip ? 'flex' : 'none',
                 flexDirection: 'column',
                 gap: '20px'
             }}>
-                {tripData.activities.map((activity) => <ActivityCard key={activity} activityName={activity} />)}
+                {tripData.activities.map((activity) => <ActivityCard key={activity.name} activityName={activity.name} />)}
             </Box>
         </ThemeProvider>
     )

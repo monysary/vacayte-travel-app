@@ -20,8 +20,13 @@ const tripSchema = new Schema({
         required: true
     },
     activities: [{
-        type: String,
-        required: true
+        name: {
+            type: String,
+            required: true,
+        },
+        saved: [{
+            type: String,
+        }]
     }]
 });
 
