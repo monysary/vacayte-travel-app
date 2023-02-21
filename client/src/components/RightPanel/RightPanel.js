@@ -1,17 +1,80 @@
+import { useState } from 'react';
 import {
     Grid,
     Typography,
-    Button
+    Button,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
 import auth from '../../utils/auth.js';
 
-function RightPanel({ font, fontColor }) {
+function RightPanel({ font, fontColor, tripData }) {
+
+    function CustomizedAccordions() {
+        const [expanded, setExpanded] = useState('');
+
+        const handleChange = (panel) => (event, newExpanded) => {
+            setExpanded(newExpanded ? panel : false);
+        };
+
+        return (
+            <>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}
+                    sx={{
+                        boxShadow: 'none',
+                        '&:before': {
+                            display: 'none'
+                        }
+                    }}
+                >
+                    <AccordionSummary>
+                        <Grid container wrap='nowrap' justifyContent='space-between' alignItems='center'>
+                            <Typography>Activity Category</Typography>
+                            <ArrowForwardIosSharpIcon
+                                sx={{
+                                    transform: expanded === 'panel1' ? 'rotate(90deg)' : 'none',
+                                    color: fontColor.primary,
+                                    fontSize: '18px',
+                                    transition: 'transform 0.2s ease-in-out'
+                                }}
+                            />
+                        </Grid>
+                    </AccordionSummary>
+                    <AccordionDetails
+                        sx={{
+                            padding: '0 16px',
+                        }}
+                    >
+                        <Typography>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
+                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </>
+        );
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <Grid container justifyContent='center' py='30px' gap='30px'>
+            <Grid
+                container
+                direction='column'
+                wrap='nowrap'
+                alignItems='center'
+                py='30px'
+                gap='30px'
+                height='100vh'
+                overflow='auto'
+            >
                 <Grid item height='60px'>
                     <Grid container height='100%' alignItems='center'>
                         <Button variant='outlined' onClick={() => auth.logout()}>
@@ -19,18 +82,16 @@ function RightPanel({ font, fontColor }) {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid item height='100%'>
-                    <Grid container alignItems='center' p='20px 30px' gap='20px'>
-                        <Grid item>
+                <Grid item>
+                    <Grid container p='20px 0px' gap='20px'>
+                        <Grid item px='30px'>
                             <Typography variant='h6' fontFamily={font} fontSize='18px'>
                                 SAVED ACTIVITIES
                             </Typography>
                         </Grid>
-                        <Grid item height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
+                        <Grid item mx='30px' height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            <Typography textAlign='center'>
-                                No Trip Selected
-                            </Typography>
+                            <CustomizedAccordions />
                         </Grid>
                     </Grid>
                 </Grid>

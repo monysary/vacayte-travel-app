@@ -130,8 +130,12 @@ function Dashboard() {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item md={2}>
-                    <RightPanel font={font.primary} fontColor={font.color} />
+                <Grid item md={2} height='100vh'>
+                    <RightPanel
+                        font={font.primary}
+                        fontColor={font.color}
+                        tripData={!loading && trip}
+                    />
                 </Grid>
             </Grid>
         </ThemeProvider>
