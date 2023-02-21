@@ -8,7 +8,7 @@ import {
     AccordionDetails
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
 
@@ -30,17 +30,23 @@ function RightPanel({ font, fontColor, tripData }) {
                         boxShadow: 'none',
                         '&:before': {
                             display: 'none'
-                        }
+                        },
                     }}
                 >
-                    <AccordionSummary>
+                    <AccordionSummary
+                        sx={{
+                            maxHeight: '48px',
+                            '&.Mui-expanded': {
+                                minHeight: '0px'
+                            }
+                        }}
+                    >
                         <Grid container wrap='nowrap' justifyContent='space-between' alignItems='center'>
                             <Typography>Activity Category</Typography>
-                            <ArrowForwardIosSharpIcon
+                            <ExpandMoreIcon
                                 sx={{
-                                    transform: expanded === 'panel1' ? 'rotate(90deg)' : 'none',
+                                    transform: expanded === 'panel1' ? 'rotate(180deg)' : 'none',
                                     color: fontColor.primary,
-                                    fontSize: '18px',
                                     transition: 'transform 0.2s ease-in-out'
                                 }}
                             />
