@@ -44,7 +44,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
         }, [activityName])
 
-        function YelpEntry({ name, image, rating, price, categories, url }) {
+        function YelpEntry({ name, image, rating, price, categories, distance, url }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
 
@@ -73,20 +73,24 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                             color={fontColor.grey}
                             textAlign='right'
                         >
-                            {<IconButton
-                                disableRipple
-                                onClick={() => {
-                                    setSaved((prev) => !prev)
-                                }}
-                            >
-                                {!saved ?
-                                    <BookmarkBorderIcon sx={{
-                                        color: fontColor.primary
-                                    }} /> :
-                                    <BookmarkIcon sx={{
-                                        color: fontColor.primary
-                                    }} />}
-                            </IconButton>}
+                            <Grid container direction='column' alignItems='flex-end'>
+                                {Math.round(distance * 0.000621371 * 10) / 10} mi
+                                {<IconButton
+                                    disableRipple
+                                    sx={{ padding: 0 }}
+                                    onClick={() => {
+                                        setSaved((prev) => !prev)
+                                    }}
+                                >
+                                    {!saved ?
+                                        <BookmarkBorderIcon sx={{
+                                            color: fontColor.primary
+                                        }} /> :
+                                        <BookmarkIcon sx={{
+                                            color: fontColor.primary
+                                        }} />}
+                                </IconButton>}
+                            </Grid>
                         </Grid>
                     </Grid>
                     <Typography
@@ -122,6 +126,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                                     rating={business.rating}
                                     price={business.price}
                                     categories={business.categories}
+                                    distance={business.distance}
                                     url={business.url}
                                 />
                             ) : <CircularProgress />}
