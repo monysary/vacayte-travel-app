@@ -134,7 +134,7 @@ function Dashboard() {
                     <RightPanel
                         font={font.primary}
                         fontColor={font.color}
-                        tripData={!loading && trip}
+                        tripInfo={!loading && trip}
                     />
                 </Grid>
             </Grid>

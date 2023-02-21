@@ -112,7 +112,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                     }}
                 >
                     <Grid container justifyContent='space-between' wrap='nowrap'>
-                        <Typography component="h2" variant="h5" fontFamily={font}>
+                        <Typography component="h2" variant="h5" fontFamily={font} color={fontColor.primary} fontWeight='bold'>
                             {activityName}
                         </Typography>
                     </Grid>
