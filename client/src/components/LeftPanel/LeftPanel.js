@@ -17,7 +17,6 @@ import { Link as RouterLink } from 'react-router-dom';
 function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName }) {
     const { loading, data } = useQuery(GET_MY_TRIPS);
     const myTrips = data?.getMyTrips.trips || [];
-
     function TripsButton() {
         if (!loading) {
             return myTrips.map((trip) =>

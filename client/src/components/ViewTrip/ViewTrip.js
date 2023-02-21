@@ -6,13 +6,15 @@ import {
     CircularProgress,
     IconButton
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
 function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
     // Creating object with trip data
     const tripData = {
+        tripID: tripInfo?._id || '',
         tripName: tripInfo?.tripName || '',
         location: tripInfo?.location || '',
         startDate: tripInfo?.startDate || '',
@@ -42,13 +44,11 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
         }, [activityName])
 
-        // if (yelpData) {
-        //     console.log(yelpData);
-        // }
-
-        function YelpEntry({ name, image, rating, price, categories, distance, url }) {
+        function YelpEntry({ name, image, rating, price, categories, url }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
+
+            const [saved, setSaved] = useState(false);
 
             return (
                 <Box maxWidth='200px'>
@@ -72,8 +72,22 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                             fontFamily={font}
                             color={fontColor.grey}
                             textAlign='right'
-                        >{Math.round(distance * 0.000621371 * 10) / 10} mi</Grid>
-
+                        >
+                            {<IconButton
+                                disableRipple
+                                onClick={() => {
+                                    setSaved((prev) => !prev)
+                                }}
+                            >
+                                {!saved ?
+                                    <BookmarkBorderIcon sx={{
+                                        color: fontColor.primary
+                                    }} /> :
+                                    <BookmarkIcon sx={{
+                                        color: fontColor.primary
+                                    }} />}
+                            </IconButton>}
+                        </Grid>
                     </Grid>
                     <Typography
                         fontSize='14px'
@@ -97,17 +111,6 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                         <Typography component="h2" variant="h5" fontFamily={font}>
                             {activityName}
                         </Typography>
-                        {/* <IconButton
-                            disableTouchRipple
-                            sx={{
-                                paddingTop: '0px',
-                                '&:hover': {
-                                    background: 'none'
-                                }
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton> */}
                     </Grid>
                     <Grid container wrap="nowrap" overflow='auto'>
                         <Grid container wrap="nowrap" gap={3}>
@@ -119,7 +122,6 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                                     rating={business.rating}
                                     price={business.price}
                                     categories={business.categories}
-                                    distance={business.distance}
                                     url={business.url}
                                 />
                             ) : <CircularProgress />}

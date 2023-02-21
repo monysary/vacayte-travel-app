@@ -98,7 +98,19 @@ const resolvers = {
       )
 
       return newTrip;
-    }
+    },
+    // saveActivity: async (parent, args, context) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError('You need to be logged in!')
+    //   }
+
+    //   const savedAct = await Trip.findByIdAndUpdate(
+    //     args.selectTrip,
+    //     {
+
+    //     }
+    //   )
+    // },
   },
   Date: dateResolver,
 };
