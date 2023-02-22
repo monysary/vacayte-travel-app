@@ -27,7 +27,8 @@ export const font = {
         white: '#F5F5F5',
         black: '#252525',
         grey: '#B2B2B2',
-        darkGrey: '#606060'
+        darkGrey: '#606060',
+        link: '#2070CB'
     }
 }
 

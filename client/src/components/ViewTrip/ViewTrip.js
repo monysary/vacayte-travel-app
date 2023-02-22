@@ -11,6 +11,9 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
+import { useMutation } from "@apollo/client";
+import { SAVE_ACTIVITY } from "../../utils/mutations.js";
+
 function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
     // Creating object with trip data
     const tripData = {
@@ -50,8 +53,11 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
             const [saved, setSaved] = useState(false);
 
+            const [saveActivity, { error, data }] = useMutation(SAVE_ACTIVITY);
+
             const handleSave = () => {
                 setSaved((prev) => !prev)
+                
             }
 
             return (

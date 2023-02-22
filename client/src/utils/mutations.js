@@ -49,6 +49,32 @@ export const ADD_TRIP = gql`
 }
 `
 
-// export const SAVE_ACTIVITY= gql`
-
-// `
+export const SAVE_ACTIVITY = gql`
+  mutation SaveActivity(
+    $tripId: ID!, 
+    $activityName: String!, 
+    $businessName: String!, 
+    $businessCategory: String!, 
+    $businessRating: Float!, 
+    $businessUrl: String!
+    ) {
+      saveActivity(
+        tripID: $tripId, 
+        activityName: $activityName, 
+        businessName: $businessName, 
+        businessCategory: $businessCategory, 
+        businessRating: $businessRating,
+        businessURL: $businessUrl
+        ) {
+          activities {
+            name
+            saved {
+              businessName
+              businessCategory
+              businessRating
+              businessURL
+            }
+          }
+      }
+  }
+`
