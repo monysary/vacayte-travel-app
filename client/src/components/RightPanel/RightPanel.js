@@ -37,22 +37,19 @@ function RightPanel({ font, fontColor, tripInfo }) {
                 <AccordionSummary
                     sx={{ maxHeight: '48px', '&.Mui-expanded': { minHeight: '0px' } }} >
                     <Grid container wrap='nowrap' justifyContent='space-between' alignItems='center'>
-                        <Typography fontSize='20px' fontFamily={font} color={fontColor.primary} fontWeight='bold'>{activityName}</Typography>
-                        <ExpandMoreIcon
-                            sx={{
-                                transform: expanded === 'panel1' ? 'rotate(180deg)' : 'none',
-                                color: fontColor.primary,
-                                transition: 'transform 0.2s ease-in-out'
-                            }}
-                        />
+                        <Typography fontSize='20px' fontFamily={font} color={fontColor.primary}>
+                            {activityName}
+                        </Typography>
+                        <ExpandMoreIcon sx={{
+                            transform: expanded === 'panel1' ? 'rotate(180deg)' : 'none',
+                            color: fontColor.primary,
+                            transition: 'transform 0.2s ease-in-out'
+                        }} />
                     </Grid>
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: '0 16px', }} >
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
+                        Placeholder
                     </Typography>
                 </AccordionDetails>
             </Accordion>

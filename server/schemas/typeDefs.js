@@ -11,12 +11,7 @@ const typeDefs = gql`
     password: String
     trips: [Trip]
   }
-
-  type Activity {
-    name: String
-    saved: [String]
-  }
-
+  
   type Trip {
     _id: ID
     tripName: String
@@ -24,6 +19,18 @@ const typeDefs = gql`
     startDate: Date
     endDate: Date
     activities: [Activity]
+  }
+  
+  type Activity {
+    name: String
+    saved: [SavedActivity]
+  }
+
+  type SavedActivity {
+    businessName: String
+    businessCategory: String
+    businessRating: Float
+    businessURL: String
   }
 
   input ActivitiesInput {

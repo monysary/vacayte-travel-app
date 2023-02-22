@@ -44,11 +44,15 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
         }, [activityName])
 
-        function YelpEntry({ name, image, rating, price, categories, distance, url }) {
+        function YelpEntry({ yelpID, name, image, rating, price, categories, distance, url }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
 
             const [saved, setSaved] = useState(false);
+
+            const handleSave = () => {
+                setSaved((prev) => !prev)
+            }
 
             return (
                 <Box maxWidth='200px'>
@@ -78,10 +82,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                                 {<IconButton
                                     disableRipple
                                     sx={{ padding: 0 }}
-                                    onClick={() => {
-                                        setSaved((prev) => !prev)
-                                    }}
-                                >
+                                    onClick={handleSave}>
                                     {!saved ?
                                         <BookmarkBorderIcon sx={{
                                             color: fontColor.primary
@@ -112,7 +113,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                     }}
                 >
                     <Grid container justifyContent='space-between' wrap='nowrap'>
-                        <Typography component="h2" variant="h5" fontFamily={font} color={fontColor.primary} fontWeight='bold'>
+                        <Typography component="h2" variant="h5" fontFamily={font} color={fontColor.primary} >
                             {activityName}
                         </Typography>
                     </Grid>
@@ -121,6 +122,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                             {yelpData ? yelpData.map((business) =>
                                 <YelpEntry
                                     key={business.id}
+                                    yelpID={business.id}
                                     name={business.name}
                                     image={business.image_url}
                                     rating={business.rating}

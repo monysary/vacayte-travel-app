@@ -16,7 +16,12 @@ export const QUERY_ME = gql`
         endDate
         activities {
           name
-          saved
+          saved {
+            businessName
+            businessCategory
+            businessRating
+            businessURL
+          }
         }
       }
     }
@@ -34,7 +39,12 @@ export const GET_MY_TRIPS = gql`
         endDate
         activities {
           name
-          saved
+          saved {
+            businessName
+            businessCategory
+            businessRating
+            businessURL
+          }
         }
       }
     }
@@ -51,7 +61,12 @@ export const SELECT_TRIP = gql`
       endDate
       activities {
         name
-        saved
+        saved {
+          businessName
+          businessCategory
+          businessRating
+          businessURL
+        }
       }
     }
   }
