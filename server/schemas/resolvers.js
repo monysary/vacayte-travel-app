@@ -114,10 +114,16 @@ const resolvers = {
         throw new AuthenticationError('No trip found with this ID!')
       };
 
+      // Check if trip contains the right activity
       const activityIndex = trip.activities.findIndex((activity) => activity.name === activityName);
-
       if (activityIndex < 0) {
         throw new AuthenticationError(`${activityName} activity not found in this trip!`)
+      };
+
+      // Check if activity is already saved
+      const isAlreadySaved = trip.activities[activityIndex].saved.findIndex((business) => business.businessURL === businessURL);
+      if (isAlreadySaved > -1 ) {
+        throw new AuthenticationError('This business is already saved!')
       };
 
       trip.activities[activityIndex] = {
@@ -139,16 +145,11 @@ const resolvers = {
       const user = await User.findById(context.user._id);
 
       const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripID);
-      console.log(userTripIndex);
-
       if (userTripIndex < 0) {
         throw new AuthenticationError('Trip not found in user!')
       };
 
       const userTripActivityIndex = user.trips[userTripIndex].activities.findIndex((activity) => activity.name === activityName);
-      console.log(activityName);
-      console.log(userTripActivityIndex);
-
       if (userTripActivityIndex < 0) {
         throw new AuthenticationError(`${activityName} activity not found in the user's trip!`)
       };
