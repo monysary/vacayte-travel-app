@@ -99,18 +99,77 @@ const resolvers = {
 
       return newTrip;
     },
-    // saveActivity: async (parent, args, context) => {
-    //   if (!context.user) {
-    //     throw new AuthenticationError('You need to be logged in!')
-    //   }
+    saveActivity: async (
+      parent,
+      { tripID, activityName, businessName, businessCategory, businessRating, businessURL },
+      context
+    ) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!')
+      };
 
-    //   const savedAct = await Trip.findByIdAndUpdate(
-    //     args.selectTrip,
-    //     {
+      const trip = await Trip.findById(tripID)
 
-    //     }
-    //   )
-    // },
+      if (!trip) {
+        throw new AuthenticationError('No trip found with this ID!')
+      };
+
+      const activityIndex = trip.activities.findIndex((activity) => activity.name === activityName);
+
+      if (activityIndex < 0) {
+        throw new AuthenticationError(`${activityName} activity not found in this trip!`)
+      };
+
+      trip.activities[activityIndex] = {
+        name: activityName,
+        saved: [
+          ...trip.activities[activityIndex].saved,
+          {
+            businessName,
+            businessCategory,
+            businessRating,
+            businessURL,
+          }
+        ]
+      }
+
+      const updatedTrip = await trip.save();
+
+      // Adding activity under user's information
+      const user = await User.findById(context.user._id);
+
+      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripID);
+      console.log(userTripIndex);
+
+      if (userTripIndex < 0) {
+        throw new AuthenticationError('Trip not found in user!')
+      };
+
+      const userTripActivityIndex = user.trips[userTripIndex].activities.findIndex((activity) => activity.name === activityName);
+      console.log(activityName);
+      console.log(userTripActivityIndex);
+
+      if (userTripActivityIndex < 0) {
+        throw new AuthenticationError(`${activityName} activity not found in the user's trip!`)
+      };
+
+      user.trips[userTripIndex].activities[userTripActivityIndex] = {
+        name: activityName,
+        saved: [
+          ...user.trips[userTripIndex].activities[userTripActivityIndex].saved,
+          {
+            businessName,
+            businessCategory,
+            businessRating,
+            businessURL,
+          }
+        ]
+      }
+
+      const updatedUser = await user.save();
+
+      return updatedTrip;
+    },
   },
   Date: dateResolver,
 };

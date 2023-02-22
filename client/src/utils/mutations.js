@@ -48,3 +48,7 @@ export const ADD_TRIP = gql`
     }
 }
 `
+
+// export const SAVE_ACTIVITY= gql`
+
+// `
