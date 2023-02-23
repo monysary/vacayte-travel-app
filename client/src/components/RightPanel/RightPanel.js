@@ -5,7 +5,8 @@ import {
     Button,
     Accordion,
     AccordionSummary,
-    AccordionDetails
+    AccordionDetails,
+    Link
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ThemeProvider } from '@mui/material/styles';
@@ -48,9 +49,33 @@ function RightPanel({ font, fontColor, tripInfo }) {
                     </Grid>
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: '0 16px', }} >
-                    <Typography>
-                        Placeholder
-                    </Typography>
+                    {activitySaved.map((activity) => {
+                        return (
+                            <Grid key={activity.businessID} container wrap='nowrap' justifyContent='space-between'>
+                                <Grid item>
+                                    <Link
+                                        fontSize='16px'
+                                        fontFamily={font}
+                                        color={fontColor.link}
+                                        underline='hover'
+                                        sx={{ '&:hover': { cursor: 'pointer' } }}
+                                        onClick={() => window.open(`${activity.businessURL}`, '_blank')}
+                                    >
+                                        {activity.businessName}
+                                    </Link>
+                                    <Typography
+                                        fontSize='12px'
+                                        fontFamily={font}
+                                        color={fontColor.grey}
+                                    >{activity.businessCategory}</Typography>
+                                </Grid>
+                                <Typography
+                                    fontSize='16px'
+                                    fontFamily={font}
+                                >{activity.businessRating}★</Typography>
+                            </Grid>
+                        )
+                    })}
                 </AccordionDetails>
             </Accordion>
         );

@@ -12,7 +12,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js'
 
 import { useMutation } from "@apollo/client";
-import { SAVE_ACTIVITY } from "../../utils/mutations.js";
+import { SAVE_ACTIVITY, DELETE_ACTIVITY } from "../../utils/mutations.js";
 
 function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
     // Creating object with trip data
@@ -56,7 +56,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
             const [saveActivity, { error, data }] = useMutation(SAVE_ACTIVITY);
 
             const handleSave = () => {
-                setSaved((prev) => !prev)
+                setSaved(true)
                 
             }
 
