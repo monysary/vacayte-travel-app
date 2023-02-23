@@ -109,19 +109,18 @@ const resolvers = {
       };
 
       const trip = await Trip.findById(tripID)
-
       if (!trip) {
         throw new AuthenticationError('No trip found with this ID!')
       };
 
-      // Check if trip contains the right activity
       const activityIndex = trip.activities.findIndex((activity) => activity.name === activityName);
+      // Check if trip contains the right activity
       if (activityIndex < 0) {
         throw new AuthenticationError(`${activityName} activity not found in this trip!`)
       };
 
-      // Check if activity is already saved
       const isAlreadySaved = trip.activities[activityIndex].saved.findIndex((business) => business.businessID === businessID);
+      // Check if activity is already saved
       if (isAlreadySaved > -1) {
         throw new AuthenticationError('This business is already saved!')
       };
@@ -173,17 +172,62 @@ const resolvers = {
 
       return updatedTrip;
     },
-    // deleteActivity: async(
-    //   parent,
-    //   { tripID, activityName, businessID, businessName, businessCategory, businessRating, businessURL },
-    //   context
-    // ) => {
-    //   if (!context.user) {
-    //     throw new AuthenticationError('You need to be logged in!')
-    //   };
+    deleteActivity: async (
+      parent,
+      { tripID, activityName, businessID },
+      context
+    ) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!')
+      };
 
+      const trip = await Trip.findById(tripID);
+      if (!trip) {
+        throw new AuthenticationError('No trip found with this ID!')
+      };
 
-    // }
+      const activityIndex = trip.activities.findIndex((activity) => activity.name === activityName);
+      // Check if trip contains the right activity
+      if (activityIndex < 0) {
+        throw new AuthenticationError(`${activityName} activity not found in this trip!`)
+      };
+
+      const businessIndex = trip.activities[activityIndex].saved.findIndex((business) => business.businessID === businessID);
+      // Check if business is in database
+      if (businessIndex < 0) {
+        throw new AuthenticationError('Business not found in Trip database!')
+      };
+
+      // Remove business from trip
+      trip.activities[activityIndex].saved.splice(businessIndex, 1);
+
+      await trip.save();
+
+      // Adding activity under user's information
+      const user = await User.findById(context.user._id);
+
+      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripID);
+      if (userTripIndex < 0) {
+        throw new AuthenticationError('Trip not found in user!')
+      };
+
+      const userTripActivityIndex = user.trips[userTripIndex].activities.findIndex((activity) => activity.name === activityName);
+      if (userTripActivityIndex < 0) {
+        throw new AuthenticationError(`${activityName} activity not found in the user's trip!`)
+      };
+
+      const userBusinessIndex = user.trips[userTripIndex].activities[userTripActivityIndex].saved.findIndex((business) => business.businessID === businessID);
+      if (userBusinessIndex < 0) {
+        throw new AuthenticationError('Business not found in User database!')
+      };
+
+      // Remove business from user's trip
+      user.trips[userTripIndex].activities[userTripActivityIndex].saved.splice(userBusinessIndex, 1);
+
+      await user.save();
+
+      return trip;
+    }
   },
   Date: dateResolver,
 };

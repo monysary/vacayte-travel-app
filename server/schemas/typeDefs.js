@@ -63,6 +63,7 @@ const typeDefs = gql`
       businessRating: Float!, 
       businessURL: String!
     ): Trip
+    deleteActivity(tripID: String!, activityName: String!, businessID: String!): Trip
   }
 `;
 

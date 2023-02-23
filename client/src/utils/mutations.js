@@ -73,3 +73,22 @@ export const SAVE_ACTIVITY = gql`
       }
   }
 `
+
+export const DELETE_ACTIVITY = gql`
+  mutation DeleteActivity($tripId: String!, $activityName: String!, $businessId: String!) {
+    deleteActivity(tripID: $tripId, activityName: $activityName, businessID: $businessId) {
+      _id
+      tripName
+      activities {
+        name
+        saved {
+          businessID
+          businessName
+          businessCategory
+          businessRating
+          businessURL
+        }
+      }
+    }
+  }
+`
