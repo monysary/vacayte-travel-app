@@ -38,12 +38,6 @@ export const ADD_TRIP = gql`
       endDate
       activities {
         name
-        saved {
-          businessName
-          businessCategory
-          businessRating
-          businessURL
-        }
       }
     }
 }
@@ -69,6 +63,7 @@ export const SAVE_ACTIVITY = gql`
           activities {
             name
             saved {
+              businessID
               businessName
               businessCategory
               businessRating

@@ -27,6 +27,7 @@ const typeDefs = gql`
   }
 
   type SavedActivity {
+    businessID: String
     businessName: String
     businessCategory: String
     businessRating: Float
@@ -53,7 +54,15 @@ const typeDefs = gql`
     register(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addTrip(tripName: String!, location: String!, startDate: Date!, endDate: Date!, activities:[ActivitiesInput]!): Trip
-    saveActivity(tripID: ID!, activityName: String!, businessName: String!, businessCategory: String!, businessRating: Float!, businessURL: String!): Trip
+    saveActivity(
+      tripID: ID!, 
+      activityName: String!, 
+      businessID: String!, 
+      businessName: String!, 
+      businessCategory: String!, 
+      businessRating: Float!, 
+      businessURL: String!
+    ): Trip
   }
 `;
 

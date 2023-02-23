@@ -101,7 +101,7 @@ const resolvers = {
     },
     saveActivity: async (
       parent,
-      { tripID, activityName, businessName, businessCategory, businessRating, businessURL },
+      { tripID, activityName, businessID, businessName, businessCategory, businessRating, businessURL },
       context
     ) => {
       if (!context.user) {
@@ -121,8 +121,8 @@ const resolvers = {
       };
 
       // Check if activity is already saved
-      const isAlreadySaved = trip.activities[activityIndex].saved.findIndex((business) => business.businessURL === businessURL);
-      if (isAlreadySaved > -1 ) {
+      const isAlreadySaved = trip.activities[activityIndex].saved.findIndex((business) => business.businessID === businessID);
+      if (isAlreadySaved > -1) {
         throw new AuthenticationError('This business is already saved!')
       };
 
@@ -131,6 +131,7 @@ const resolvers = {
         saved: [
           ...trip.activities[activityIndex].saved,
           {
+            businessID,
             businessName,
             businessCategory,
             businessRating,
@@ -159,6 +160,7 @@ const resolvers = {
         saved: [
           ...user.trips[userTripIndex].activities[userTripActivityIndex].saved,
           {
+            businessID,
             businessName,
             businessCategory,
             businessRating,
@@ -171,6 +173,17 @@ const resolvers = {
 
       return updatedTrip;
     },
+    // deleteActivity: async(
+    //   parent,
+    //   { tripID, activityName, businessID, businessName, businessCategory, businessRating, businessURL },
+    //   context
+    // ) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError('You need to be logged in!')
+    //   };
+
+
+    // }
   },
   Date: dateResolver,
 };

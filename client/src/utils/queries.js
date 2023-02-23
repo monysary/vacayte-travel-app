@@ -17,6 +17,7 @@ export const QUERY_ME = gql`
         activities {
           name
           saved {
+            businessID
             businessName
             businessCategory
             businessRating
@@ -40,6 +41,7 @@ export const GET_MY_TRIPS = gql`
         activities {
           name
           saved {
+            businessID
             businessName
             businessCategory
             businessRating
@@ -62,6 +64,7 @@ export const SELECT_TRIP = gql`
       activities {
         name
         saved {
+          businessID
           businessName
           businessCategory
           businessRating
