@@ -21,21 +21,13 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
         activities: tripInfo?.activities || [],
     };
 
-    // Fetch Yelp data by location and term
-    const yelpLocationTerm = async (term) => {
-        const response = await fetch(`http://localhost:3000/api/yelp?location=${tripData.location}&term=${term}`);
-
-        const data = await response.json();
-
-        return data;
-    }
-
-    function ActivityCard({ activityName, activitySaved }) {
+    function ActivityCard({ tripID, activityName, activitySaved }) {
         const [yelpData, setYelpData] = useState(null);
-
+        
         useEffect(() => {
             const fetchYelp = async () => {
-                const data = await yelpLocationTerm(activityName)
+                const response = await fetch(`http://localhost:3000/api/yelp?location=${tripData.location}&term=${activityName}`);
+                const data = await response.json();
                 setYelpData(data?.businesses || null)
             };
 
@@ -74,7 +66,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
                                     fontColor={fontColor}
                                     activityName={activityName}
                                     activitySaved={activitySaved}
-                                    tripData={tripData}
+                                    tripID={tripID}
                                 />
                             ) : <CircularProgress />}
                         </Grid>
@@ -98,9 +90,11 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
                 {tripData.activities.map((activity) =>
                     <ActivityCard
                         key={activity.name}
+                        tripID={tripData.tripID}
                         activityName={activity.name}
                         activitySaved={activity.saved}
-                    />)}
+                    />
+                )}
             </Box>
         </ThemeProvider>
     )

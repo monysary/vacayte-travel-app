@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
     Box,
     Grid,
@@ -24,7 +24,7 @@ function YelpEntry({
     fontColor,
     activityName,
     activitySaved,
-    tripData,
+    tripID,
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
@@ -42,7 +42,7 @@ function YelpEntry({
             try {
                 await saveActivity({
                     variables: {
-                        tripId: tripData.tripID,
+                        tripId: tripID,
                         activityName: activityName,
                         businessID: yelpID,
                         businessName: name,
@@ -59,7 +59,7 @@ function YelpEntry({
             try {
                 await deleteActivity({
                     variables: {
-                        tripId: tripData.tripID,
+                        tripId: tripID,
                         activityName: activityName,
                         businessID: yelpID,
                     }

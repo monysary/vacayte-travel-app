@@ -226,7 +226,6 @@ const resolvers = {
 
       await user.save();
 
-      return trip;
     }
   },
   Date: dateResolver,
