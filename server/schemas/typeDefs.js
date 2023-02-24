@@ -55,7 +55,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addTrip(tripName: String!, location: String!, startDate: Date!, endDate: Date!, activities:[ActivitiesInput]!): Trip
     saveActivity(
-      tripID: ID!, 
+      tripId: ID!, 
       activityName: String!, 
       businessID: String!, 
       businessName: String!, 
@@ -63,7 +63,7 @@ const typeDefs = gql`
       businessRating: Float!, 
       businessURL: String!
     ): Trip
-    deleteActivity(tripID: String!, activityName: String!, businessID: String!): Trip
+    deleteActivity(tripId: String!, activityName: String!, businessID: String!): Trip
   }
 `;
 

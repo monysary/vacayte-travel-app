@@ -41,24 +41,26 @@ export const ADD_TRIP = gql`
       }
     }
 }
-`
+`;
 
 export const SAVE_ACTIVITY = gql`
   mutation SaveActivity(
     $tripId: ID!, 
-    $activityName: String!, 
+    $activityName: String!,
+    $businessID: String!,
     $businessName: String!, 
     $businessCategory: String!, 
     $businessRating: Float!, 
-    $businessUrl: String!
+    $businessURL: String!
     ) {
       saveActivity(
-        tripID: $tripId, 
-        activityName: $activityName, 
+        tripId: $tripId, 
+        activityName: $activityName,
+        businessID: $businessID,
         businessName: $businessName, 
         businessCategory: $businessCategory, 
         businessRating: $businessRating,
-        businessURL: $businessUrl
+        businessURL: $businessURL
         ) {
           activities {
             name
@@ -72,11 +74,11 @@ export const SAVE_ACTIVITY = gql`
           }
       }
   }
-`
+`;
 
 export const DELETE_ACTIVITY = gql`
-  mutation DeleteActivity($tripId: String!, $activityName: String!, $businessId: String!) {
-    deleteActivity(tripID: $tripId, activityName: $activityName, businessID: $businessId) {
+  mutation DeleteActivity($tripId: String!, $activityName: String!, $businessID: String!) {
+    deleteActivity(tripId: $tripId, activityName: $activityName, businessID: $businessID) {
       _id
       tripName
       activities {
@@ -91,4 +93,4 @@ export const DELETE_ACTIVITY = gql`
       }
     }
   }
-`
+`;

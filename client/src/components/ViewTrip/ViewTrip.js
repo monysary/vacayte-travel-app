@@ -34,8 +34,8 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
         return data;
     }
 
-    function ActivityCard({ activityName }) {
-        const [yelpData, setYelpData] = useState(null)
+    function ActivityCard({ activityName, activitySaved }) {
+        const [yelpData, setYelpData] = useState(null);
 
         useEffect(() => {
             const fetchYelp = async () => {
@@ -45,19 +45,47 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
             fetchYelp()
 
-        }, [activityName])
+        }, [activityName]);
 
         function YelpEntry({ yelpID, name, image, rating, price, categories, distance, url }) {
             const categoryArr = [];
             categories.map((c) => categoryArr.push(c.title))
 
-            const [saved, setSaved] = useState(false);
+            const [saveActivity, { error: saveError, data: saveData }] = useMutation(SAVE_ACTIVITY);
+            const [deleteActivity, { error: deleteError, data: deleteData }] = useMutation(DELETE_ACTIVITY);
 
-            const [saveActivity, { error, data }] = useMutation(SAVE_ACTIVITY);
-
-            const handleSave = () => {
-                setSaved(true)
-                
+            const bookmarkYelp = async () => {
+                if (activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0) {
+                    console.log('Saving Bookmark');
+                    try {
+                        await saveActivity({
+                            variables: {
+                                tripId: tripData.tripID,
+                                activityName: activityName,
+                                businessID: yelpID,
+                                businessName: name,
+                                businessCategory: categoryArr.join(', '),
+                                businessRating: rating,
+                                businessURL: url
+                            }
+                        })
+                    } catch (err) {
+                        console.log(err);
+                    }
+                } else {
+                    console.log('Deleting Bookmark');
+                    try {
+                        await deleteActivity({
+                            variables: {
+                                tripId: tripData.tripID,
+                                activityName: activityName,
+                                businessID: yelpID,
+                            }
+                        })
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
             }
 
             return (
@@ -88,8 +116,8 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                                 {<IconButton
                                     disableRipple
                                     sx={{ padding: 0 }}
-                                    onClick={handleSave}>
-                                    {!saved ?
+                                    onClick={bookmarkYelp}>
+                                    {activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0 ?
                                         <BookmarkBorderIcon sx={{
                                             color: fontColor.primary
                                         }} /> :
@@ -156,7 +184,12 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
                 flexDirection: 'column',
                 gap: '20px'
             }}>
-                {tripData.activities.map((activity) => <ActivityCard key={activity.name} activityName={activity.name} />)}
+                {tripData.activities.map((activity) =>
+                    <ActivityCard
+                        key={activity.name}
+                        activityName={activity.name}
+                        activitySaved={activity.saved}
+                    />)}
             </Box>
         </ThemeProvider>
     )

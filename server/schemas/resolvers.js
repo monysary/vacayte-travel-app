@@ -101,14 +101,14 @@ const resolvers = {
     },
     saveActivity: async (
       parent,
-      { tripID, activityName, businessID, businessName, businessCategory, businessRating, businessURL },
+      { tripId, activityName, businessID, businessName, businessCategory, businessRating, businessURL },
       context
     ) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!')
       };
 
-      const trip = await Trip.findById(tripID)
+      const trip = await Trip.findById(tripId)
       if (!trip) {
         throw new AuthenticationError('No trip found with this ID!')
       };
@@ -144,7 +144,7 @@ const resolvers = {
       // Adding activity under user's information
       const user = await User.findById(context.user._id);
 
-      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripID);
+      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripId);
       if (userTripIndex < 0) {
         throw new AuthenticationError('Trip not found in user!')
       };
@@ -174,14 +174,14 @@ const resolvers = {
     },
     deleteActivity: async (
       parent,
-      { tripID, activityName, businessID },
+      { tripId, activityName, businessID },
       context
     ) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!')
       };
 
-      const trip = await Trip.findById(tripID);
+      const trip = await Trip.findById(tripId);
       if (!trip) {
         throw new AuthenticationError('No trip found with this ID!')
       };
@@ -206,7 +206,7 @@ const resolvers = {
       // Adding activity under user's information
       const user = await User.findById(context.user._id);
 
-      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripID);
+      const userTripIndex = user.trips.findIndex((trip) => trip._id.toHexString() === tripId);
       if (userTripIndex < 0) {
         throw new AuthenticationError('Trip not found in user!')
       };
