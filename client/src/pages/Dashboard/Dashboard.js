@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
     Grid,
     Typography,
@@ -49,7 +49,7 @@ function Dashboard() {
 
     // Populating currently selected trip information on dashboard with lazy query
     const [selectTrip, setSelectTrip] = useState('');
-    const [lazySelectTrip, { loading: lazyLoading, data: lazyData }] = useLazyQuery(SELECT_TRIP, {
+    const [loadTrip, { loading: lazyLoading, data: lazyData }] = useLazyQuery(SELECT_TRIP, {
         variables: { _id: selectTrip }
     });
     const lazyTrip = lazyData?.selectTrip || {}
@@ -77,7 +77,7 @@ function Dashboard() {
                         setIsDisplayed={setIsDisplayed}
                         setSelectTrip={setSelectTrip}
                         tripName={!lazyLoading && lazyTrip.tripName}
-                        lazySelectTrip={lazySelectTrip}
+                        loadTrip={loadTrip}
                     />
                 </Grid>
                 <Grid item md={8}
@@ -126,7 +126,6 @@ function Dashboard() {
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
-                                setIsDisplayed={setIsDisplayed}
                                 tripInfo={lazyTrip}
                             />
                         </Box>

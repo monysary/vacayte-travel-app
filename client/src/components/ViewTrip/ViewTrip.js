@@ -10,7 +10,7 @@ import { theme } from '../../App.js'
 
 import YelpEntry from "./YelpEntry.js";
 
-function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
+function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
     // Creating object with trip data
     const tripData = {
         tripID: tripInfo?._id || '',
@@ -41,7 +41,7 @@ function ViewTrip({ font, fontColor, isDisplayed, setIsDisplayed, tripInfo }) {
 
             fetchYelp()
 
-        }, [activityName]);
+        }, []);
 
         if (tripData.activities.length > 0) {
             return (

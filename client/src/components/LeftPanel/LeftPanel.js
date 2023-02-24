@@ -14,7 +14,7 @@ import { GET_MY_TRIPS } from '../../utils/queries.js';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName, lazySelectTrip }) {
+function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName, loadTrip }) {
     const { loading, data } = useQuery(GET_MY_TRIPS);
     const myTrips = data?.getMyTrips.trips || [];
     function TripsButton() {
@@ -36,7 +36,7 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                                 welcome: false,
                                 viewTrip: true,
                             })
-                            lazySelectTrip()
+                            loadTrip()
                         }}
                     >
                         {trip.tripName}

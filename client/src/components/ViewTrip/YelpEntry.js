@@ -24,7 +24,7 @@ function YelpEntry({
     fontColor,
     activityName,
     activitySaved,
-    tripData
+    tripData,
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
@@ -32,19 +32,13 @@ function YelpEntry({
     const [saveActivity, { error: saveError, data: saveData }] = useMutation(SAVE_ACTIVITY);
     const [deleteActivity, { error: deleteError, data: deleteData }] = useMutation(DELETE_ACTIVITY);
 
-    const [isBookmarked, setIsBookmarked] = useState(null);
-
-    useEffect(() => {
-        if (activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0) {
-            setIsBookmarked(false)
-        } else {
-            setIsBookmarked(true)
-        }
-
-    }, [isBookmarked])
+    const [isBookmarked, setIsBookmarked] = useState(
+        activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0
+    );
 
     const bookmarkYelp = async () => {
-        if (activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0) {
+        if (isBookmarked) {
+            setIsBookmarked(false)
             try {
                 await saveActivity({
                     variables: {
@@ -57,12 +51,11 @@ function YelpEntry({
                         businessURL: url
                     }
                 })
-                setIsBookmarked(true)
-
             } catch (err) {
                 console.log(err);
             }
         } else {
+            setIsBookmarked(true)
             try {
                 await deleteActivity({
                     variables: {
@@ -71,8 +64,6 @@ function YelpEntry({
                         businessID: yelpID,
                     }
                 })
-                setIsBookmarked(false)
-
             } catch (err) {
                 console.log(err);
             }
@@ -109,10 +100,10 @@ function YelpEntry({
                             sx={{ padding: 0 }}
                             onClick={bookmarkYelp}>
                             {!isBookmarked ?
-                                <BookmarkBorderIcon sx={{
+                                <BookmarkIcon sx={{
                                     color: fontColor.primary
                                 }} /> :
-                                <BookmarkIcon sx={{
+                                <BookmarkBorderIcon sx={{
                                     color: fontColor.primary
                                 }} />}
                         </IconButton>}
