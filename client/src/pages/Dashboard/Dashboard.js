@@ -16,7 +16,7 @@ import SearchBar from '../../components/SearchBar';
 import Welcome from '../../components/Welcome';
 import ViewTrip from '../../components/ViewTrip';
 
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import { SELECT_TRIP } from '../../utils/queries.js';
 
 export const font = {
@@ -47,19 +47,19 @@ function Dashboard() {
         viewTrip: false,
     })
 
-    // Populating currently selected trip information on dashboard
+    // Populating currently selected trip information on dashboard with lazy query
     const [selectTrip, setSelectTrip] = useState('');
-    const { loading, data } = useQuery(SELECT_TRIP, {
+    const [lazySelectTrip, { loading: lazyLoading, data: lazyData }] = useLazyQuery(SELECT_TRIP, {
         variables: { _id: selectTrip }
     });
-    const trip = data?.selectTrip || {}
-    const startDate = new Date(trip.startDate).toLocaleDateString('en-us', {
+    const lazyTrip = lazyData?.selectTrip || {}
+    const lazyStartDate = new Date(lazyTrip.startDate).toLocaleDateString('en-us', {
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
 
     })
-    const endDate = new Date(trip.endDate).toLocaleDateString('en-us', {
+    const lazyEndDate = new Date(lazyTrip.endDate).toLocaleDateString('en-us', {
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
@@ -76,7 +76,8 @@ function Dashboard() {
                         isDisplayed={isDisplayed}
                         setIsDisplayed={setIsDisplayed}
                         setSelectTrip={setSelectTrip}
-                        tripName={!loading && trip.tripName}
+                        tripName={!lazyLoading && lazyTrip.tripName}
+                        lazySelectTrip={lazySelectTrip}
                     />
                 </Grid>
                 <Grid item md={8}
@@ -103,13 +104,13 @@ function Dashboard() {
                             <Grid item>
                                 <Box sx={{ display: selectTrip === '' ? 'none' : 'block' }}>
                                     <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`} textAlign='right'>
-                                        {!loading && `${trip.tripName}`}
+                                        {!lazyLoading && `${lazyTrip.tripName}`}
                                     </Typography>
                                     <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
-                                        {!loading && `${trip.location}`}
+                                        {!lazyLoading && `${lazyTrip.location}`}
                                     </Typography>
                                     <Typography variant='subtitle1' fontFamily={font.primary} color={`${font.color.grey}`} textAlign='right'>
-                                        {!loading && `${startDate} - ${endDate}`}
+                                        {!lazyLoading && `${lazyStartDate} - ${lazyEndDate}`}
                                     </Typography>
                                 </Box>
                             </Grid>
@@ -126,7 +127,7 @@ function Dashboard() {
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
                                 setIsDisplayed={setIsDisplayed}
-                                tripInfo={trip}
+                                tripInfo={lazyTrip}
                             />
                         </Box>
                     </Box>
@@ -135,7 +136,7 @@ function Dashboard() {
                     <RightPanel
                         font={font.primary}
                         fontColor={font.color}
-                        tripInfo={!loading && trip}
+                        tripInfo={!lazyLoading && lazyTrip}
                     />
                 </Grid>
             </Grid>

@@ -32,8 +32,6 @@ function RightPanel({ font, fontColor, tripInfo }) {
             setExpanded(newExpanded ? panel : false);
         };
 
-        console.log(activitySaved);
-
         return (
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}
                 sx={{ boxShadow: 'none', '&:before': { display: 'none' }, '&.Mui-expanded': { margin: '0px' } }}>
