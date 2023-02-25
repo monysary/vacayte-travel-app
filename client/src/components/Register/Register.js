@@ -27,7 +27,7 @@ function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
 
   const [isDisabled, setIsDisabled] = useState(true)
 
-  const [register, { error, data }] = useMutation(REGISTER_USER);
+  const [register] = useMutation(REGISTER_USER);
 
   const handleInputChange = ({ target: { name, value } }) => {
     setFormState({ ...formState, [name]: value });
@@ -47,7 +47,7 @@ function Register({ displayState, setLoginDisplay, setRegisterDisplay }) {
     } else {
       setIsDisabled(true)
     }
-  }, [handleInputChange])
+  }, [formState])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

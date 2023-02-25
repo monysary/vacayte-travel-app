@@ -10,7 +10,7 @@ import { theme } from '../../App.js'
 
 import YelpEntry from "./YelpEntry.js";
 
-function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, setSaveActivityState }) {
+function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
     // Creating object with trip data
     const tripData = {
         tripID: tripInfo?._id || '',
@@ -23,7 +23,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, s
 
     function ActivityCard({ tripID, activityName, activitySaved }) {
         const [yelpData, setYelpData] = useState(null);
-        
+
         useEffect(() => {
             const fetchYelp = async () => {
                 const response = await fetch(`http://localhost:3000/api/yelp?location=${tripData.location}&term=${activityName}`);
@@ -41,7 +41,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, s
                     sx={{
                         backgroundColor: '#F5F5F5',
                         borderRadius: '20px',
-                        padding: '10px 20px'
+                        padding: '10px 20px',
                     }}
                 >
                     <Grid container justifyContent='space-between' wrap='nowrap'>
@@ -67,8 +67,6 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, s
                                     activityName={activityName}
                                     activitySaved={activitySaved}
                                     tripID={tripID}
-                                    saveActivityState={saveActivityState}
-                                    setSaveActivityState={setSaveActivityState}
                                 />
                             ) : <CircularProgress />}
                         </Grid>
@@ -87,7 +85,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, s
                 paddingBottom: '40px',
                 display: isDisplayed.viewTrip ? 'flex' : 'none',
                 flexDirection: 'column',
-                gap: '20px'
+                gap: '20px',
             }}>
                 {tripData.activities.map((activity) =>
                     <ActivityCard

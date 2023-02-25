@@ -22,11 +22,10 @@ function LeftPanel({
     setSelectTrip,
     tripName,
     loadTrip,
-    setSaveActivityState,
 }) {
     const { loading, data } = useQuery(GET_MY_TRIPS);
     const myTrips = data?.getMyTrips.trips || [];
-    
+
     function TripsButton() {
         if (!loading) {
             return myTrips.map((trip) =>
@@ -47,7 +46,6 @@ function LeftPanel({
                                 viewTrip: true,
                             })
                             loadTrip()
-                            setSaveActivityState(trip.activities)
                         }}
                     >
                         {trip.tripName}

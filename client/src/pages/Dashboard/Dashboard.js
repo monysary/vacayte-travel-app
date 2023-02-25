@@ -12,12 +12,11 @@ import dashboardBackground from '../../assets/images/dashboard-background.png';
 import auth from '../../utils/auth.js';
 
 import LeftPanel from '../../components/LeftPanel';
-import RightPanel from '../../components/RightPanel';
 import SearchBar from '../../components/SearchBar';
 import Welcome from '../../components/Welcome';
 import ViewTrip from '../../components/ViewTrip';
 
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { SELECT_TRIP } from '../../utils/queries.js';
 
 export const font = {
@@ -67,10 +66,6 @@ function Dashboard() {
 
     })
 
-    // Loading saved activity for right panel
-    const [saveActivityState, setSaveActivityState] = useState([]);
-    console.log(saveActivityState);
-
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
@@ -83,10 +78,9 @@ function Dashboard() {
                         setSelectTrip={setSelectTrip}
                         tripName={!lazyLoading && lazyTrip.tripName}
                         loadTrip={loadTrip}
-                        setSaveActivityState={setSaveActivityState}
                     />
                 </Grid>
-                <Grid item md
+                <Grid item md={10}
                     sx={{
                         height: '100%',
                         backgroundImage: `url(${dashboardBackground})`,
@@ -136,8 +130,6 @@ function Dashboard() {
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
                                 tripInfo={lazyTrip}
-                                saveActivityState={saveActivityState}
-                                setSaveActivityState={setSaveActivityState}
                             />
                         </Box>
                     </Box>

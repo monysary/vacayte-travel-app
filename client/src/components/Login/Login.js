@@ -22,7 +22,7 @@ function Login({ displayState, setLoginDisplay, setRegisterDisplay }) {
     password: "",
   });
 
-  const [Login, { error, data }] = useMutation(LOGIN_USER);
+  const [Login] = useMutation(LOGIN_USER);
 
   const handleInputChange = ({ target: { name, value } }) => {
     setFormState({ ...formState, [name]: value });

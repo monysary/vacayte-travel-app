@@ -25,14 +25,12 @@ function YelpEntry({
     activityName,
     activitySaved,
     tripID,
-    saveActivityState,
-    setSaveActivityState,
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
 
-    const [saveActivity, { error: saveError, data: saveData }] = useMutation(SAVE_ACTIVITY);
-    const [deleteActivity, { error: deleteError, data: deleteData }] = useMutation(DELETE_ACTIVITY);
+    const [saveActivity] = useMutation(SAVE_ACTIVITY);
+    const [deleteActivity] = useMutation(DELETE_ACTIVITY);
 
     const [isBookmarked, setIsBookmarked] = useState(
         activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0
@@ -76,6 +74,7 @@ function YelpEntry({
         <Box maxWidth='200px'>
             <img
                 src={`${image}`}
+                alt={name}
                 width='200px'
                 height='200px'
                 style={{ borderRadius: '10px', cursor: 'pointer' }}
