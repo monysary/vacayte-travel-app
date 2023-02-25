@@ -23,10 +23,9 @@ const tripSchema = new Schema({
         name: {
             type: String,
             required: true,
-            unique: true
         },
         saved: [{
-            businessID: { type: String, unique: true },
+            businessID: { type: String },
             businessName: { type: String },
             businessCategory: { type: String },
             businessRating: { type: Number },

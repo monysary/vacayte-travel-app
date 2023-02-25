@@ -11,6 +11,8 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useMutation } from "@apollo/client";
 import { SAVE_ACTIVITY, DELETE_ACTIVITY } from "../../utils/mutations.js";
 
+import placeholder from '../../assets/images/placeholder.png'
+
 function YelpEntry({
     yelpID,
     name,
@@ -73,7 +75,7 @@ function YelpEntry({
     return (
         <Box maxWidth='200px'>
             <img
-                src={`${image}`}
+                src={image ? `${image}` : placeholder}
                 alt={name}
                 width='200px'
                 height='200px'

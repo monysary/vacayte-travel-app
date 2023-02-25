@@ -120,7 +120,7 @@ function AddTripForm() {
     function ActivityChoices({ activityName, icon, selected, setActivity, setFormState }) {
         const handleClick = () => {
             if (!selected) {
-                setFormState({ ...formState, activities: [...formState.activities, activityName] })
+                setFormState({ ...formState, activities: [...formState.activities, { name: activityName }] })
                 setActivity(activity.map((activity) => {
                     if (activity.name === activityName) {
                         return { ...activity, selected: true }
@@ -129,7 +129,7 @@ function AddTripForm() {
                     }
                 }))
             } else {
-                setFormState({ ...formState, activities: formState.activities.filter((activity) => activity !== activityName) })
+                setFormState({ ...formState, activities: formState.activities.filter((activity) => activity.name !== activityName) })
                 setActivity(activity.map((activity) => {
                     if (activity.name === activityName) {
                         return { ...activity, selected: false }
@@ -138,6 +138,8 @@ function AddTripForm() {
                     }
                 }))
             }
+
+            console.log(formState);
         }
 
         return (
