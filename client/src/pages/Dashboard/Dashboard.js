@@ -3,6 +3,7 @@ import {
     Grid,
     Typography,
     Box,
+    Button
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../App.js';
@@ -66,6 +67,10 @@ function Dashboard() {
 
     })
 
+    // Loading saved activity for right panel
+    const [saveActivityState, setSaveActivityState] = useState([]);
+    console.log(saveActivityState);
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" wrap='nowrap' sx={{ height: '100vh' }}>
@@ -78,9 +83,10 @@ function Dashboard() {
                         setSelectTrip={setSelectTrip}
                         tripName={!lazyLoading && lazyTrip.tripName}
                         loadTrip={loadTrip}
+                        setSaveActivityState={setSaveActivityState}
                     />
                 </Grid>
-                <Grid item md={8}
+                <Grid item md
                     sx={{
                         height: '100%',
                         backgroundImage: `url(${dashboardBackground})`,
@@ -89,9 +95,12 @@ function Dashboard() {
                     }}
                 >
                     <Box height='100vh' overflow='auto'>
-                        <Box p='30px 20% 20px'>
+                        <Grid container p='30px 40px 20px' wrap='nowrap' justifyContent='space-between'>
                             <SearchBar font={font.primary} fontColor={font.color} />
-                        </Box>
+                            <Button variant='outlined' color='secondary' onClick={() => auth.logout()}>
+                                Logout
+                            </Button>
+                        </Grid>
                         <Grid container wrap='nowrap' justifyContent='space-between' px='40px'>
                             <Grid item>
                                 <Typography variant='h4' fontFamily={font.primary} color={`${font.color.white}`}>
@@ -127,16 +136,11 @@ function Dashboard() {
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
                                 tripInfo={lazyTrip}
+                                saveActivityState={saveActivityState}
+                                setSaveActivityState={setSaveActivityState}
                             />
                         </Box>
                     </Box>
-                </Grid>
-                <Grid item md={2} height='100vh'>
-                    <RightPanel
-                        font={font.primary}
-                        fontColor={font.color}
-                        tripInfo={!lazyLoading && lazyTrip}
-                    />
                 </Grid>
             </Grid>
         </ThemeProvider>

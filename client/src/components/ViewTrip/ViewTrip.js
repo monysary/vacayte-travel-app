@@ -10,7 +10,7 @@ import { theme } from '../../App.js'
 
 import YelpEntry from "./YelpEntry.js";
 
-function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
+function ViewTrip({ font, fontColor, isDisplayed, tripInfo, saveActivityState, setSaveActivityState }) {
     // Creating object with trip data
     const tripData = {
         tripID: tripInfo?._id || '',
@@ -67,6 +67,8 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
                                     activityName={activityName}
                                     activitySaved={activitySaved}
                                     tripID={tripID}
+                                    saveActivityState={saveActivityState}
+                                    setSaveActivityState={setSaveActivityState}
                                 />
                             ) : <CircularProgress />}
                         </Grid>

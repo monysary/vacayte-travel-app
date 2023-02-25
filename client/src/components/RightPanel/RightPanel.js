@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
@@ -6,7 +6,7 @@ import {
     Accordion,
     AccordionSummary,
     AccordionDetails,
-    Link
+    Link,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ThemeProvider } from '@mui/material/styles';
@@ -14,18 +14,10 @@ import { theme } from '../../App.js';
 
 import auth from '../../utils/auth.js';
 
-function RightPanel({ font, fontColor, tripInfo }) {
-    // Creating object with trip data
-    const tripData = {
-        tripID: tripInfo?._id || '',
-        tripName: tripInfo?.tripName || '',
-        location: tripInfo?.location || '',
-        startDate: tripInfo?.startDate || '',
-        endDate: tripInfo?.endDate || '',
-        activities: tripInfo?.activities || [],
-    };
-
+function RightPanel({ font, fontColor, saveActivityState }) {
+    
     function CustomizedAccordions({ activityName, activitySaved }) {
+        console.log(activitySaved);
         const [expanded, setExpanded] = useState('');
 
         const handleChange = (panel) => (event, newExpanded) => {
@@ -109,7 +101,7 @@ function RightPanel({ font, fontColor, tripInfo }) {
                         </Grid>
                         <Grid item mx='30px' height='2px' width='100%' sx={{ backgroundColor: '#DFDFDF' }} />
                         <Grid item xs={12}>
-                            {tripData.activities.map((activity) =>
+                            {saveActivityState.map((activity) =>
                                 <CustomizedAccordions
                                     key={activity.name}
                                     activityName={activity.name}

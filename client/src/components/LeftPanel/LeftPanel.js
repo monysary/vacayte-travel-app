@@ -14,9 +14,19 @@ import { GET_MY_TRIPS } from '../../utils/queries.js';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip, tripName, loadTrip }) {
+function LeftPanel({
+    font,
+    fontColor,
+    isDisplayed,
+    setIsDisplayed,
+    setSelectTrip,
+    tripName,
+    loadTrip,
+    setSaveActivityState,
+}) {
     const { loading, data } = useQuery(GET_MY_TRIPS);
     const myTrips = data?.getMyTrips.trips || [];
+    
     function TripsButton() {
         if (!loading) {
             return myTrips.map((trip) =>
@@ -37,6 +47,7 @@ function LeftPanel({ font, fontColor, isDisplayed, setIsDisplayed, setSelectTrip
                                 viewTrip: true,
                             })
                             loadTrip()
+                            setSaveActivityState(trip.activities)
                         }}
                     >
                         {trip.tripName}

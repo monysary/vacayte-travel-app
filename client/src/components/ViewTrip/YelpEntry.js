@@ -25,6 +25,8 @@ function YelpEntry({
     activityName,
     activitySaved,
     tripID,
+    saveActivityState,
+    setSaveActivityState,
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
