@@ -13,6 +13,7 @@ import auth from '../../utils/auth.js';
 
 import LeftPanel from '../../components/LeftPanel';
 import SearchBar from '../../components/SearchBar';
+import NavBar from '../../components/NavBar';
 import Welcome from '../../components/Welcome';
 import ViewTrip from '../../components/ViewTrip';
 
@@ -90,7 +91,11 @@ function Dashboard() {
                 >
                     <Box height='100vh' overflow='auto'>
                         <Grid container p='30px 40px 20px' wrap='nowrap' justifyContent='space-between'>
-                            <SearchBar font={font.primary} fontColor={font.color} />
+                            {/* <SearchBar font={font.primary} fontColor={font.color} /> */}
+                            <NavBar
+                                isDisplayed={isDisplayed}
+                                setIsDisplayed={setIsDisplayed}
+                            />
                             <Button variant='outlined' color='secondary' onClick={() => auth.logout()}>
                                 Logout
                             </Button>
