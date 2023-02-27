@@ -46,6 +46,8 @@ function Dashboard() {
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
         viewTrip: false,
+        savedActivities: false,
+        itinerary: false,
     })
 
     // Populating currently selected trip information on dashboard with lazy query
@@ -95,6 +97,7 @@ function Dashboard() {
                             <NavBar
                                 isDisplayed={isDisplayed}
                                 setIsDisplayed={setIsDisplayed}
+                                selectTrip={selectTrip}
                             />
                             <Button variant='outlined' color='secondary' onClick={() => auth.logout()}>
                                 Logout
@@ -128,7 +131,6 @@ function Dashboard() {
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
-                                setIsDisplayed={setIsDisplayed}
                             />
                             <ViewTrip
                                 font={font.primary}

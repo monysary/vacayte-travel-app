@@ -11,7 +11,7 @@ import { theme } from '../../App.js';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-function Welcome({ font, fontColor, isDisplayed, setIsDisplayed }) {
+function Welcome({ font, fontColor, isDisplayed }) {
     return (
         <ThemeProvider theme={theme}>
             <Container
