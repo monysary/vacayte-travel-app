@@ -10,7 +10,7 @@ import { theme } from '../../App.js'
 
 import YelpEntry from "./YelpEntry.js";
 
-function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
+function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
     // Creating object with trip data
     const tripData = {
         tripID: tripInfo?._id || '',
@@ -34,6 +34,25 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
             fetchYelp()
 
         }, []);
+
+        // Yelp business search example
+        useEffect(() => {
+            const fetchYelpBusiness1 = async () => {
+                const response = await fetch(`http://localhost:3000/api/yelp/GS3pkYEfqsBeX6pi5iGQyA`)
+                const data = await response.json()
+
+                // console.log(data);
+            }
+            const fetchYelpBusiness2 = async () => {
+                const response = await fetch(`http://localhost:3000/api/yelp/yksyeArPkKJvY-W1Gusx2g`)
+                const data = await response.json()
+
+                // console.log(data);
+            }
+
+            fetchYelpBusiness1()
+            fetchYelpBusiness2()
+        }, [])
 
         if (tripData.activities.length > 0) {
             return (
@@ -67,6 +86,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo }) {
                                     activityName={activityName}
                                     activitySaved={activitySaved}
                                     tripID={tripID}
+                                    loadTrip={loadTrip}
                                 />
                             ) : <CircularProgress />}
                         </Grid>

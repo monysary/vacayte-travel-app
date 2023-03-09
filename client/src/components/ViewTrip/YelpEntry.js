@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Box,
     Grid,
@@ -8,8 +8,9 @@ import {
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
 import { SAVE_ACTIVITY, DELETE_ACTIVITY } from "../../utils/mutations.js";
+import { BOOKMARKED } from '../../utils/queries.js';
 
 import placeholder from '../../assets/images/placeholder.png'
 
@@ -27,6 +28,7 @@ function YelpEntry({
     activityName,
     activitySaved,
     tripID,
+    loadTrip
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
@@ -74,14 +76,15 @@ function YelpEntry({
 
     return (
         <Box maxWidth='200px'>
-            <img
-                src={image ? `${image}` : placeholder}
-                alt={name}
-                width='200px'
-                height='200px'
-                style={{ borderRadius: '10px', cursor: 'pointer' }}
-                onClick={() => window.open(`${url}`, '_blank')}
-            />
+            <a href={url} target='_blank'>
+                <img
+                    src={image ? `${image}` : placeholder}
+                    alt={name}
+                    width='200px'
+                    height='200px'
+                    style={{ borderRadius: '10px', cursor: 'pointer' }}
+                />
+            </a>
             <Grid container wrap="nowrap" justifyContent='space-between'>
                 <Typography
                     fontSize='14px'

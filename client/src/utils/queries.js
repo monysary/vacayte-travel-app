@@ -51,7 +51,7 @@ export const GET_MY_TRIPS = gql`
       }
     }
   }
-`
+`;
 
 export const SELECT_TRIP = gql`
   query SelectTrip($_id: ID!) {
@@ -73,4 +73,17 @@ export const SELECT_TRIP = gql`
       }
     }
   }
-`
+`;
+
+export const BOOKMARKED = gql`
+  query Bookmarked($_id: ID!) {
+    selectTrip(_id: $_id) {
+      activities {
+        name
+        saved {
+          businessID
+        }
+      }
+    }
+  }
+`;

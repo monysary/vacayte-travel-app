@@ -137,6 +137,7 @@ function Dashboard() {
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
                                 tripInfo={lazyTrip}
+                                loadTrip={loadTrip}
                             />
                         </Box>
                     </Box>
