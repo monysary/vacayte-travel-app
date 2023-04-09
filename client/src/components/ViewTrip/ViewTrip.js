@@ -21,6 +21,8 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         activities: tripInfo?.activities || [],
     };
 
+
+
     function ActivityCard({ tripID, activityName, activitySaved }) {
         const [yelpData, setYelpData] = useState(null);
 
@@ -52,7 +54,10 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
 
             fetchYelpBusiness1()
             fetchYelpBusiness2()
-        }, [])
+        }, []);
+
+        const [bookmarked, setBookmarked] = useState(activitySaved);
+        console.log(bookmarked);
 
         if (tripData.activities.length > 0) {
             return (
@@ -87,6 +92,8 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
                                     activitySaved={activitySaved}
                                     tripID={tripID}
                                     loadTrip={loadTrip}
+                                    bookmarked={bookmarked}
+                                    setBookmarked={setBookmarked}
                                 />
                             ) : <CircularProgress />}
                         </Grid>

@@ -28,7 +28,9 @@ function YelpEntry({
     activityName,
     activitySaved,
     tripID,
-    loadTrip
+    loadTrip,
+    bookmarked,
+    setBookmarked
 }) {
     const categoryArr = [];
     categories.map((c) => categoryArr.push(c.title))
@@ -37,12 +39,15 @@ function YelpEntry({
     const [deleteActivity] = useMutation(DELETE_ACTIVITY);
 
     const [isBookmarked, setIsBookmarked] = useState(
-        activitySaved.findIndex((activity) => activity.businessID === yelpID) < 0
+        bookmarked.findIndex((activity) => activity.businessID === yelpID) < 0
     );
 
     const bookmarkYelp = async () => {
         if (isBookmarked) {
-            setIsBookmarked(false)
+            setBookmarked((prev) => [
+                ...prev,
+                { businessID: yelpID }
+            ])
             try {
                 await saveActivity({
                     variables: {
@@ -57,9 +62,10 @@ function YelpEntry({
                 })
             } catch (err) {
                 console.log(err);
+            } finally {
+                setIsBookmarked(false)
             }
         } else {
-            setIsBookmarked(true)
             try {
                 await deleteActivity({
                     variables: {
@@ -70,6 +76,8 @@ function YelpEntry({
                 })
             } catch (err) {
                 console.log(err);
+            } finally {
+                setIsBookmarked(true)
             }
         }
     }
