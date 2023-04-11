@@ -57,7 +57,6 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         }, []);
 
         const [bookmarked, setBookmarked] = useState(activitySaved);
-        console.log(bookmarked);
 
         if (tripData.activities.length > 0) {
             return (

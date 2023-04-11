@@ -143,6 +143,8 @@ function Dashboard() {
                                 font={font.primary}
                                 fontColor={font.color}
                                 isDisplayed={isDisplayed}
+                                lazyStartDate={lazyStartDate}
+                                lazyEndDate={lazyEndDate}
                             />
                         </Box>
                     </Box>
