@@ -12,7 +12,6 @@ import dashboardBackground from '../../assets/images/dashboard-background.png';
 import auth from '../../utils/auth.js';
 
 import LeftPanel from '../../components/LeftPanel';
-import SearchBar from '../../components/SearchBar';
 import NavBar from '../../components/NavBar';
 import Welcome from '../../components/Welcome';
 import ViewTrip from '../../components/ViewTrip';

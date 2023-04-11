@@ -30,7 +30,7 @@ function NavBar({ selectTrip, isDisplayed, setIsDisplayed }) {
                             createItinerary: true
                         })
                     }}
-                >Create Itinerary</Button>
+                >Itinerary</Button>
             </Grid>
         </Grid>
     )

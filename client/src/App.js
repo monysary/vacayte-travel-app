@@ -41,6 +41,9 @@ export const theme = createTheme({
     },
     info: {
       main: '#606060'
+    },
+    black: {
+      main: '#252525'
     }
   },
 });

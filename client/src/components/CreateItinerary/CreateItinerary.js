@@ -1,7 +1,10 @@
 import {
     Box,
-    Grid
+    Grid,
+    Typography,
+    Button
 } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from '../../App.js'
 
@@ -40,14 +43,35 @@ function CreateItinerary({ font, fontColor, isDisplayed, lazyStartDate, lazyEndD
 
     const vacayteDates = getDates(lazyStartDate, lazyEndDate)
 
-    function DateEntry({ date }) {
+    function DateEntry() {
+        return (
+            <Box maxWidth='200px'>
+                
+            </Box>
+        )
+    }
+
+    function ViewDates({ date }) {
         return (
             <Grid item sx={{
                 backgroundColor: '#F5F5F5',
                 borderRadius: '20px',
                 padding: '10px 20px',
             }}>
-                {date}
+                <Grid container justifyContent='space-between' wrap='nowrap'>
+                    <Typography component="h2" variant="h5" fontFamily={font} color={fontColor.primary}>
+                        {date}
+                    </Typography>
+                </Grid>
+                <Grid container wrap='nowrap' overflow='auto'>
+                    <Grid container wrap='nowrap' gap={3}>
+                        <Box maxWidth='200px'>
+                            <Button variant='outlined' color='secondary'>
+                                <AddIcon />
+                            </Button>
+                        </Box>
+                    </Grid>
+                </Grid>
             </Grid>
         )
     }
@@ -62,7 +86,7 @@ function CreateItinerary({ font, fontColor, isDisplayed, lazyStartDate, lazyEndD
                 gap: '20px',
             }}>
                 {vacayteDates.map((date) =>
-                    <DateEntry
+                    <ViewDates
                         key={date}
                         date={date}
                     />
