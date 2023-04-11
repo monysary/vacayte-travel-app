@@ -68,7 +68,6 @@ function Dashboard() {
         year: 'numeric',
 
     })
-
     
 
     return (
@@ -97,8 +96,6 @@ function Dashboard() {
                         <Grid container p='30px 40px 20px' wrap='nowrap' justifyContent='space-between'>
                             {/* <SearchBar font={font.primary} fontColor={font.color} /> */}
                             <NavBar
-                                isDisplayed={isDisplayed}
-                                setIsDisplayed={setIsDisplayed}
                                 selectTrip={selectTrip}
                             />
                             <Button variant='outlined' color='secondary' onClick={() => auth.logout()}>
