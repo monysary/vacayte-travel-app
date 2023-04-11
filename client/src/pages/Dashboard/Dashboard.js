@@ -16,6 +16,7 @@ import SearchBar from '../../components/SearchBar';
 import NavBar from '../../components/NavBar';
 import Welcome from '../../components/Welcome';
 import ViewTrip from '../../components/ViewTrip';
+import CreateItinerary from '../../components/CreateItinerary';
 
 import { useLazyQuery } from '@apollo/client';
 import { SELECT_TRIP } from '../../utils/queries.js';
@@ -46,8 +47,7 @@ function Dashboard() {
     const [isDisplayed, setIsDisplayed] = useState({
         welcome: true,
         viewTrip: false,
-        savedActivities: false,
-        itinerary: false,
+        createItinerary: false,
     })
 
     // Populating currently selected trip information on dashboard with lazy query
@@ -68,7 +68,6 @@ function Dashboard() {
         year: 'numeric',
 
     })
-    
 
     return (
         <ThemeProvider theme={theme}>
@@ -137,6 +136,11 @@ function Dashboard() {
                                 isDisplayed={isDisplayed}
                                 tripInfo={lazyTrip}
                                 loadTrip={loadTrip}
+                            />
+                            <CreateItinerary 
+                                font={font.primary}
+                                fontColor={font.color}
+                                isDisplayed={isDisplayed}
                             />
                         </Box>
                     </Box>
