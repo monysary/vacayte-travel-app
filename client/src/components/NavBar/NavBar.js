@@ -3,16 +3,33 @@ import {
     Grid,
 } from '@mui/material'
 
-function NavBar({ selectTrip }) {
+function NavBar({ selectTrip, isDisplayed, setIsDisplayed }) {
 
 
     return (
         <Grid item>
-            <Grid container gap={4} sx={{
+            <Grid container gap={2} sx={{
                 display: selectTrip === '' ? 'none' : 'flex'
             }}>
                 <Button color='secondary'
                     variant='contained'
+                    onClick={() => {
+                        setIsDisplayed({
+                            ...isDisplayed,
+                            viewTrip: true,
+                            createItinerary: false
+                        })
+                    }}
+                >Activities</Button>
+                <Button color='secondary'
+                    variant='contained'
+                    onClick={() => {
+                        setIsDisplayed({
+                            ...isDisplayed,
+                            viewTrip: false,
+                            createItinerary: true
+                        })
+                    }}
                 >Create Itinerary</Button>
             </Grid>
         </Grid>

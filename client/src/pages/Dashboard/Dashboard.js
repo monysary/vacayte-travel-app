@@ -96,6 +96,8 @@ function Dashboard() {
                             {/* <SearchBar font={font.primary} fontColor={font.color} /> */}
                             <NavBar
                                 selectTrip={selectTrip}
+                                isDisplayed={isDisplayed}
+                                setIsDisplayed={setIsDisplayed}
                             />
                             <Button variant='outlined' color='secondary' onClick={() => auth.logout()}>
                                 Logout

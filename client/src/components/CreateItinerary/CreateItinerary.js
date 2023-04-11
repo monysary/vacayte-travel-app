@@ -8,8 +8,9 @@ function CreateItinerary({ font, fontColor, isDisplayed }) {
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{
-                // display: isDisplayed.createItinerary ? 'flex' : 'none',
-                display: 'flex'
+                display: isDisplayed.createItinerary ? 'flex' : 'none',
+                marginX: '40px',
+                paddingBottom: '40px',
             }}>
                 Hello
             </Box>
