@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
-const { join } = require("path");
+const { join, resolve } = require("path");
 const { authMiddleware } = require("./utils/auth.js");
 
 const { typeDefs, resolvers } = require("./schemas");
