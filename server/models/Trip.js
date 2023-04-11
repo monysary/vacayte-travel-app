@@ -31,7 +31,7 @@ const tripSchema = new Schema({
             businessRating: { type: Number },
             businessURL: { type: String },
         }]
-    }]
+    }],
 });
 
 const Trip = model('VacayteTrip', tripSchema);
