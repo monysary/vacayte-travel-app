@@ -24,6 +24,9 @@ The Itinerary page on the dashboard is still being built. Users can view the lis
 ### - Itinerary PDF
 Users are not able to download a PDF of their finished itinerary. Users should be able to select from a list of templates to generate their itinerary PDF.
 
+### - Mobile UI
+The app has yet to be configured to smaller screen devices.
+
 ## Technologies used
 - React
 - Node.js
