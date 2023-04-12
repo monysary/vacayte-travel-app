@@ -40,13 +40,13 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         // Yelp business search example
         // useEffect(() => {
         //     const fetchYelpBusiness1 = async () => {
-        //         const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp/GS3pkYEfqsBeX6pi5iGQyA`)
+        //         const response = await fetch(`http://localhost:3000/api/yelp/GS3pkYEfqsBeX6pi5iGQyA`)
         //         const data = await response.json()
 
         //         // console.log(data);
         //     }
         //     const fetchYelpBusiness2 = async () => {
-        //         const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp/yksyeArPkKJvY-W1Gusx2g`)
+        //         const response = await fetch(`http://localhost:3000/api/yelp/yksyeArPkKJvY-W1Gusx2g`)
         //         const data = await response.json()
 
         //         // console.log(data);
