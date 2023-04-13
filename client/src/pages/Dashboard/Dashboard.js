@@ -36,6 +36,7 @@ export const font = {
 function Dashboard() {
     if (!localStorage.getItem('auth_token')) {
         window.location.assign('/');
+        
     } else if (auth.tokenExpired()) {
         auth.logout();
     }
