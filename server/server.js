@@ -23,19 +23,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors())
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(join("client", "build")));
-
-  app.get("/", function (req, res) {
-    res.sendFile(resolve(__dirname, "..", "client", "build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "..", "client", "build", "index.html"));
-  });
-}
-
 app.use(require('./controllers'))
+
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(join("client", "build")));
+
+//   app.get("*", function (req, res) {
+//     res.sendFile(resolve(__dirname, "..", "client", "build", "index.html"));
+//   });
+// } else {
+//   app.get("/", (req, res) => {
+//     res.sendFile(join(__dirname, "..", "client", "build", "index.html"));
+//   });
+// }
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await apolloServer.start();

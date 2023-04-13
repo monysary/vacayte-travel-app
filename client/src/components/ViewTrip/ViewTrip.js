@@ -29,21 +29,12 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         useEffect(() => {
             const fetchYelp = async () => {
                 try {
-                    let responseClone
                     fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`)
                         .then((res) => {
-                            responseClone = res.clone()
                             return res.json()
                         })
                         .then((data) => {
                             setYelpData(data?.businesses || null)
-
-                        }, (rejectionReason) => {
-                            console.log('Error parsing JSON from response', rejectionReason, responseClone);
-                            responseClone.text()
-                                .then((bodyText) => {
-                                    console.log('Received the following instead of JSON:', bodyText);
-                                })
                         })
                 } catch (err) {
                     console.log('Yelp Fetch Error:', err);
