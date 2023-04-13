@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:3001/",
+  "proxy": "https://obscure-fjord-08413.herokuapp.com/",
   "dependencies": {
     "@apollo/client": "^3.7.5",
     "@date-io/jalaali": "^2.16.1",
