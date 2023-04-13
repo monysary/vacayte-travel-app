@@ -11,6 +11,8 @@ const db = require("./config");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+const cors = require('cors')
+
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
@@ -19,6 +21,7 @@ const apolloServer = new ApolloServer({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors())
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(join("client", "build")));

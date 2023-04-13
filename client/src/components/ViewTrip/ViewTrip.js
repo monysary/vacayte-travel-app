@@ -45,7 +45,6 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
                                     console.log('Received the following instead of JSON:', bodyText);
                                 })
                         })
-                    // const data = await response.json();
                 } catch (err) {
                     console.log('Yelp Fetch Error:', err);
                 }
