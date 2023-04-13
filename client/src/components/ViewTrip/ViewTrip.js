@@ -28,11 +28,14 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
 
         useEffect(() => {
             const fetchYelp = async () => {
-                const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`);
-                console.log('-----response:', response);
-                const data = await response.json();
-                console.log('-----data:', data);
-                setYelpData(data?.businesses || null)
+                try {
+                    const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`);
+                    console.log('-----response:', response);
+                    const data = response.json();
+                    setYelpData(data?.businesses || null)
+                } catch (err) {
+                    console.log('Yelp Fetch Error:', err);
+                }
             };
 
             fetchYelp()
