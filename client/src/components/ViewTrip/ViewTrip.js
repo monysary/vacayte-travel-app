@@ -21,8 +21,6 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         activities: tripInfo?.activities || [],
     };
 
-
-
     function ActivityCard({ tripID, activityName, activitySaved }) {
         const [yelpData, setYelpData] = useState(null);
 
@@ -44,25 +42,6 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
             fetchYelp()
 
         }, []);
-
-        // Yelp business search example
-        // useEffect(() => {
-        //     const fetchYelpBusiness1 = async () => {
-        //         const response = await fetch(`http://localhost:3000/api/yelp/GS3pkYEfqsBeX6pi5iGQyA`)
-        //         const data = await response.json()
-
-        //         // console.log(data);
-        //     }
-        //     const fetchYelpBusiness2 = async () => {
-        //         const response = await fetch(`http://localhost:3000/api/yelp/yksyeArPkKJvY-W1Gusx2g`)
-        //         const data = await response.json()
-
-        //         // console.log(data);
-        //     }
-
-        //     fetchYelpBusiness1()
-        //     fetchYelpBusiness2()
-        // }, []);
 
         const [bookmarked, setBookmarked] = useState(activitySaved);
 
