@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     try {
         const yelpFetch = await fetch(yelpEndpoint, {
             method: 'GET',
-            // mode: 'cors',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${yelpAPIKey}`
