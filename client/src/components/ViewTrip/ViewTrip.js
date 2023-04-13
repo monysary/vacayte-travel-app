@@ -30,7 +30,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
             const fetchYelp = async () => {
                 try {
                     let responseClone
-                    fetch(`/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`)
+                    fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`)
                         .then((res) => {
                             responseClone = res.clone()
                             return res.json()
