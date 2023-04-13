@@ -15,6 +15,9 @@ import homeBackground from '../../assets/images/home-background.jpg'
 function Home() {
   if (localStorage.getItem("auth_token")) {
     window.location.assign("/dashboard");
+    let authToken = localStorage.getItem("auth_token");
+    localStorage.clear();
+    localStorage.setItem("auth_token", authToken);
   }
 
   const [loginDisplay, setLoginDisplay] = useState(true);
