@@ -29,13 +29,21 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         useEffect(() => {
             const fetchYelp = async () => {
                 try {
+                    let responseClone
                     fetch(`/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`)
                         .then((res) => {
+                            responseClone = res.clone()
                             return res.json()
                         })
                         .then((data) => {
                             setYelpData(data?.businesses || null)
 
+                        }, (rejectionReason) => {
+                            console.log('Error parsing JSON from response', rejectionReason, responseClone);
+                            responseClone.text()
+                                .then((bodyText) => {
+                                    console.log('Received the following instead of JSON:', bodyText);
+                                })
                         })
                     // const data = await response.json();
                 } catch (err) {
