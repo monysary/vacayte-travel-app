@@ -29,9 +29,15 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
         useEffect(() => {
             const fetchYelp = async () => {
                 try {
-                    const response = await fetch(`/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`);
-                    const data = await response.json();
-                    setYelpData(data?.businesses || null)
+                    fetch(`/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`)
+                        .then((res) => {
+                            return res.json()
+                        })
+                        .then((data) => {
+                            setYelpData(data?.businesses || null)
+
+                        })
+                    // const data = await response.json();
                 } catch (err) {
                     console.log('Yelp Fetch Error:', err);
                 }
