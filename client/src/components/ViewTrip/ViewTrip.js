@@ -28,7 +28,7 @@ function ViewTrip({ font, fontColor, isDisplayed, tripInfo, loadTrip }) {
 
         useEffect(() => {
             const fetchYelp = async () => {
-                const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}`);
+                const response = await fetch(`https://obscure-fjord-08413.herokuapp.com/api/yelp?location=${tripData.location}&term=${activityName}&cache=false`);
                 const data = await response.json();
                 setYelpData(data?.businesses || null)
             };
