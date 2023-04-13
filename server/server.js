@@ -25,17 +25,21 @@ app.use(cors())
 
 app.use(require('./controllers'))
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(join("client", "build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(join("client", "build")));
 
-//   app.get("*", function (req, res) {
-//     res.sendFile(resolve(__dirname, "..", "client", "build", "index.html"));
-//   });
-// } else {
-//   app.get("/", (req, res) => {
-//     res.sendFile(join(__dirname, "..", "client", "build", "index.html"));
-//   });
-// }
+  app.get('/api/yelp', (req, res) => {
+    res.json(require('./controllers'))
+  })
+
+  app.get("*", function (req, res) {
+    res.sendFile(resolve(__dirname, "..", "client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.sendFile(join(__dirname, "..", "client", "build", "index.html"));
+  });
+}
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await apolloServer.start();
