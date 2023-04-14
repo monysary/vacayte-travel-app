@@ -1,7 +1,7 @@
 {
   "name": "merntemplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) <br/> ![vacayte-title](./images/Vacayte%20Title.png)",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -16,5 +16,13 @@
   "devDependencies": {
     "concurrently": "^7.6.0",
     "yelp-fusion": "^3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monysary/vacayte-travel-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/monysary/vacayte-travel-app/issues"
+  },
+  "homepage": "https://github.com/monysary/vacayte-travel-app#readme"
 }
