@@ -183,6 +183,7 @@ export default function MobileDrawer({
               anchor={anchor}
               open={state[anchor]}
               onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
             >
               {list(anchor)}
             </SwipeableDrawer>

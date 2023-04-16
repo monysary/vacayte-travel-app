@@ -12,7 +12,6 @@ import Welcome from "../../components/Welcome";
 import ViewTrip from "../../components/ViewTrip";
 import CreateItinerary from "../../components/CreateItinerary";
 
-import MobileMenu from "../../components/MobileMenu";
 import MobileHeader from "../../components/MobileHeader";
 
 import { useLazyQuery } from "@apollo/client";
@@ -75,6 +74,7 @@ function Dashboard() {
   return (
     <ThemeProvider theme={theme}>
       <MobileHeader
+        className="hide-md"
         font={font.primary}
         fontColor={font.color}
         isDisplayed={isDisplayed}
