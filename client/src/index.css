@@ -7,3 +7,19 @@ body {
     background-color: #F5F5F5;
     height: 100vh;
 }
+
+
+
+@media screen and (max-width: 600px) {
+.hide-mobile {
+    visibility:none;
+    display:none;
+}
+}
+
+@media screen and (min-width: 600px) {
+    .hide-md {
+        visibility:none;
+        display:none;
+    }
+}
