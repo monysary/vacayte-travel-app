@@ -8,15 +8,11 @@ body {
   height: 100vh;
 }
 
-/* need position:absolute on body for mobile header to be sticky, but it breaks background */
-/* could make header fixed and add mt to dashboard;
- since overflow is auto, there are two vertical scrollbars on thin screens, hard to notice */
-
-/* .hide-md {
-  top: 0;
-} */
-
 @media screen and (max-width: 599px) {
+  body {
+    overflow-y: hidden;
+  }
+
   .hide-mobile {
     visibility: none;
     display: none;
