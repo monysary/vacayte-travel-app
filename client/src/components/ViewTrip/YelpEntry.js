@@ -38,6 +38,11 @@ function YelpEntry({
     existingTrips = [];
   }
 
+  let nonExistentTrips = JSON.parse(localStorage.getItem("-" + tripID));
+  if (nonExistentTrips == null) {
+    nonExistentTrips = [];
+  }
+
   const [isBookmarked, setIsBookmarked] = useState(
     bookmarked.findIndex((activity) => activity.businessID === yelpID) < 0
   );
@@ -70,6 +75,8 @@ function YelpEntry({
       console.log("bookmark removed", yelpID);
       //   localStorage.removeItem("bookmarks", yelpID);
       let newExistingTrips = existingTrips.filter((x) => x !== yelpID);
+      nonExistentTrips.push(yelpID);
+      localStorage.setItem("-" + tripID, JSON.stringify(nonExistentTrips));
       localStorage.setItem(tripID, JSON.stringify(newExistingTrips));
 
       try {
@@ -119,7 +126,9 @@ function YelpEntry({
                 sx={{ padding: 0 }}
                 onClick={bookmarkYelp}
               >
-                {!isBookmarked || existingTrips.includes(yelpID) ? (
+                {(!isBookmarked && !nonExistentTrips.includes(yelpID)) ||
+                (existingTrips.includes(yelpID) &&
+                  !nonExistentTrips.includes(yelpID)) ? (
                   <BookmarkIcon
                     sx={{
                       color: fontColor.primary,
